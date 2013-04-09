@@ -1,0 +1,14 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "2.5.8",
+    "stylus": ">= 0.0.1",
+    "jade": ">= 0.0.1",
+    "connect-redis": "~1.4.4",
+    "optimist": "~0.3.4",
+    "underscore": "~1.4.2",
+    "underscore.string": "~2.3.1"
+  }
+}

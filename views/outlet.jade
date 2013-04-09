@@ -1,0 +1,131 @@
+section#blah
+	section(data-title="i")
+		section#about-information
+			section.about-paragraph
+				h1=label
+				//h2 "Quote something here"
+				p(style=" background: rgba(10,10,10,0.8); padding: 28px; font-family: 'BlackJackRegular'; margin-top: 52px; ")=description
+				section#about-contact
+					ul
+						-if(address.length > 0)
+							li
+								h1 Address
+								h2=address
+						-if(phone.length > 0)
+							li
+								h1 Phone
+								h2=phone
+						-if(fax.length > 0)
+							li
+								h1 Fax
+								h2=fax
+						-if(email.length > 0)
+							li
+								h1 Email
+								h2=email
+
+	- if(typeof menus != "undefined")
+		section(data-title="m", data-color="pink",style="position:relative")
+			img(src="/images/canvas01.jpg")#srcimg.hide
+			canvas(height="500", width="980", style="width: 980px; height: 500px;")#canvas s
+			section#menu_list
+				a.setmenu-normal Ramadan Menu 1
+				a.setmenu-normal Ramadan Menu 2
+				a.setmenu-normal Ramadan Menu Special
+			section.setmenu
+				ul
+					li
+						strong Dates
+					li
+						strong Orange Juice
+					li
+						strong Hedhikaa
+					li
+						strong Pudding
+					li
+						strong Dates
+					li
+						strong Dates
+					li
+						strong Dates
+					li
+						strong Dates
+					li
+						strong Dates
+					li
+						strong Dates
+				ul
+					li
+						strong Dates
+
+					li
+						strong Orange Juice
+
+					li
+						strong Hedhikaa
+
+					li
+						strong Pudding
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+				ul
+					li
+						strong Dates
+
+					li
+						strong Orange Juice
+
+					li
+						strong Hedhikaa
+
+					li
+						strong Pudding
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+					li
+						strong Dates
+
+			div#price
+				span 135 rf
+				br
+				span / person
+	
+	section(data-title="c").borderly
+		div#banner
+			ul.bjqs
+				- each img in gallery
+					li
+						img(src="/files/" + img)
+	section(data-title="l")#map
+		iframe(width="980", height="500", frameborder="0", scrolling="no", marginheight="0", marginwidth="0", src="https://maps.google.com/maps/ms?msid=211052834475404324715.0004c65927dfba5d4b92b&amp;msa=0&amp;ie=UTF8&amp;ll="+location+"&amp;spn=0.002087,0.002411&amp;t=v&amp;iwloc=lyrftr:m,26434485041491031,4.174713,73.504262&amp;output=embed")
+

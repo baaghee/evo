@@ -1,0 +1,35 @@
+section#catering
+	div.slides(style='height:500px')
+		-each img in images
+			img(src="/files/" + img)
+	section
+		h1(style='z-index:1000')#catering-heading Food 
+			span(style='font-weight:normal') catering 
+			span#catering-heading-call ✆	
+				span(style='font-weight:normal')=phone
+	section.row
+			-if(typeof menus == 'object')
+				section#catering_information.no-padding
+					each menu in menus
+						h4(data-food=menu.items)=menu.title
+				
+			-if(heading5.length > 0)
+				section#catering_information
+					h2=heading5
+					p=description5
+			-if(heading4.length > 0)
+				section.catering_para
+					h2=heading4
+					p=description4
+			-if(heading3.length > 0)
+				section.catering_para
+					h2=heading3
+					p=description3
+			-if(heading2.length > 0)
+				section.catering_para
+					h2=heading2
+					p=description2
+			-if(heading1.length > 0)
+				section.catering_para
+					h2=heading1
+					p=description1

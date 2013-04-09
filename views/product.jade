@@ -1,0 +1,62 @@
+link(href="/stylesheets/jquery.jqzoom.css", rel="stylesheet")
+script(src='/javascripts/jquery.jqzoom-core.js')
+script //$(function(){ $("a#zoom").jqzoom({zoomWidth:100,zoomHeight:100, alwaysOn : true });});
+ul.breadcrumb(style='text-transform:capitalize')
+	li
+		a(href='/') Home
+		span.divider /
+	li
+		a(href='/products') Products
+		span.divider /
+	li
+		a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
+		span.divider /
+	li
+		a(href=nav.link)=nav.subcategory
+		span.divider /
+	li.active=product.name
+div.container.marketing
+	div#category-head.row
+		div.row
+			div.span6
+				div#product_thumbs.span6
+					-each pic in product.gallery
+						img(src="/files/small_" + pic, data-pic=src="/files/large_" + pic)
+				div.span6
+					img(src='/files/large_' + product.gallery[0])#product_thumbs_large
+			div#product-detail.span6
+				h3
+					|#{product.name}
+					span.pull-right=product.price
+					br
+					small=product.item_n
+				div!=product.description
+				div
+					h5 Downloads
+					h5
+						i.icon-download-alt
+						a(href='#') Operation Manual
+		hr.featurette-divider
+		div#featured.span6
+			-if(typeof popular == 'object')
+				div#product-recommendations.row
+					h2 Popular Products
+					-each item in popular
+						div.span2
+							img.img-circle(src="/files/mediumbig_" + item.gallery[0])
+							h3=item.name
+							h5=item.price
+							p=item.details
+							p
+								a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
+
+		div#featured.span5
+			-if(typeof related != 'undefined')
+				div#product-recommendations.row
+					h2 Related Products
+					-each item in related
+						a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase())
+							div.span1
+								img.img-circle(src="/files/medium_" + item.gallery[0])
+								h3=item.name
+								h5=item.price

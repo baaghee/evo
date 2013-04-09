@@ -1,0 +1,47 @@
+div.span8
+	h4 Carousel
+	div.row.slider-pic
+		-var src;
+		div.span2
+			a(href='#carouselModal',role='button',data-toggle='modal')
+				-if(homepage_slides== null){image1="http://placehold.it/140x140"; image1_heading=""; image1_details=""; image1_url="";image1_url_label=""; _id="";}
+				img.img-polaroid(image1, data-heading=image1_heading, data-details=image1_details, data-url=image1_url, data-url_label=image1_url_label, cms-id=_id, cms-field='image1')
+	h4 Featured Products
+	div.row.featured-pic
+		-var src;
+		div.span2
+			a(href='#featuredModal',role='button',data-toggle='modal')
+				-if( homepage_featured_products == null || typeof homepage_featured_products.prod1 =='undefined' || !homepage_featured_products.prod1){src='http://placehold.it/140x140';}else{src="/files/"+homepage_featured_products.prod1.gallery[0]}
+				img.img-polaroid(cms-field='prod1', src=src)
+		div.span2
+			a(href='#featuredModal',role='button',data-toggle='modal')
+				-if( homepage_featured_products == null || typeof homepage_featured_products.prod2 =='undefined' || !homepage_featured_products.prod2){src='http://placehold.it/140x140';}else{src="/files/"+homepage_featured_products.prod2.gallery[0]}
+				img.img-polaroid(cms-field='prod2', src=src)
+		div.span2
+			a(href='#featuredModal',role='button',data-toggle='modal')
+				-if( homepage_featured_products == null || typeof homepage_featured_products.prod3 =='undefined' || !homepage_featured_products.prod3){src='http://placehold.it/140x140';}else{src="/files/"+homepage_featured_products.prod3.gallery[0]}
+				img.img-polaroid(cms-field='prod3', src=src)
+		div.span2
+			a(href='#featuredModal',role='button',data-toggle='modal')
+				-if( homepage_featured_products == null || typeof homepage_featured_products.prod4 =='undefined' || !homepage_featured_products.prod4){src='http://placehold.it/140x140';}else{src="/files/"+homepage_featured_products.prod4.gallery[0]}
+				img.img-polaroid(cms-field='prod4', src=src)
+	h4 Popular Products
+	div.row.popular-pic
+		-var src;
+		div.span2
+			a(href='#popularModal',role='button',data-toggle='modal')
+				-if( homepage_popular_products == null || typeof homepage_popular_products.prod1 =='undefined' || !homepage_popular_products.prod1){src='http://placehold.it/140x140';}else{src="/files/"+homepage_popular_products.prod1.gallery[0]}
+				img.img-polaroid(cms-field='prod1', src=src)
+		div.span2
+			a(href='#popularModal',role='button',data-toggle='modal')
+				-if( homepage_popular_products == null || typeof homepage_popular_products.prod2 =='undefined' || !homepage_popular_products.prod2){src='http://placehold.it/140x140';}else{src="/files/"+homepage_popular_products.prod2.gallery[0]}
+				img.img-polaroid(cms-field='prod2', src=src)
+		div.span2
+			a(href='#popularModal',role='button',data-toggle='modal')
+				-if( homepage_popular_products == null || typeof homepage_popular_products.prod3 =='undefined' || !homepage_popular_products.prod3){src='http://placehold.it/140x140';}else{src="/files/"+homepage_popular_products.prod3.gallery[0]}
+				img.img-polaroid(cms-field='prod3', src=src)
+		div.span2
+			a(href='#popularModal',role='button',data-toggle='modal')
+				-if( homepage_popular_products == null || typeof homepage_popular_products.prod4 =='undefined' || !homepage_popular_products.prod4){src='http://placehold.it/140x140';}else{src="/files/"+homepage_popular_products.prod4.gallery[0]}
+				img.img-polaroid(cms-field='prod4', src=src)
+

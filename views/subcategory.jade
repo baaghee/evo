@@ -1,0 +1,71 @@
+script(src='/javascripts/masonry.js')
+
+ul.breadcrumb
+	li
+		a(href='/') Home
+		span.divider /
+	li
+		a(href='/products') Products
+		span.divider /
+	li
+		a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
+		span.divider /
+	li.active=nav.subcategory
+div.container.marketing
+	div#category-head.row
+			-if(typeof latest != 'undefined')
+				div#latest.span3
+					h3 Latest in this category
+					-each item in latest
+						img(src="/files/mediumbig_" + item.gallery[0])
+						h4=item.name
+						h5=item.price
+						p=item.details
+						p
+							a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
+			div#featured.span8
+				-if(typeof featured == 'object')
+					div#subCarousel.carousel.slide
+						div.carousel-inner
+							-first = true;
+							-each item in featured
+								div(class="item " + (first == true ? "active" : ""))
+									div.span4
+										img(src="/files/mediumbig_" + item.gallery[0])
+									div.span3
+										h3=item.name
+										h5=item.price
+										p=item.details
+										a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
+										div.pull-right.sharemenu
+											span.share-on Share
+											a(href='#')
+												i.icon-facebook-sign.icon-2x
+											a(href='#')
+												i.icon-twitter.icon-2x
+											a(href='#')
+												i.icon-pinterest.icon-2x
+								-if(first == true) first = false;
+						a.left.carousel-control(href='#subCarousel', data-slide='prev') ‹
+						a.right.carousel-control(href='#subCarousel', data-slide='next') ›
+				-if(typeof popular == 'object')
+					div#popular-products.row
+						h2 Popular Products
+						-each item in popular
+							div.span2
+								img.img-circle(src="/files/mediumbig_" + item.gallery[0])
+								h3=item.name
+								h5=item.price
+								p=item.details
+								p
+									a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
+	hr.featurette-divider
+	h2 Living Room Furniture
+	div#all-products.row
+		div.span3
+			img(src='http://www.ikea.com/PIAimages/0142146_PE302105_S3.JPG')
+			a(href='#')
+				h4 Heading
+			h5 $45.55
+		br.clear
+	a#all-more.btn.btn-block(href='#') More

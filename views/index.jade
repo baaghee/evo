@@ -1,0 +1,182 @@
+div#evoCarousel.carousel.slide
+	div.carousel-inner
+		-if (slides)
+			-if (slides.image1)
+				div.item.active
+					img(src='/files/' + slides.image1, alt='')
+					div.container
+						div.carousel-caption
+							-if (slides.image1_heading)
+								h1=slides.image1_heading
+							-if (slides.image1_details)
+								p.lead=slides.image1_details
+							-if (slides.image1_url_label && slides.image1_url_label != "")
+								a.btn.btn-large.btn-primary(href=slides.image1_url||"")=slides.image1_url_label
+			-if (slides.image2)
+				div.item
+					img(src='/files/' + slides.image2, alt='')
+					div.container
+						div.carousel-caption
+							-if (slides.image2_heading)
+								h1=slides.image2_heading
+							-if (slides.image2_details)
+								p.lead=slides.image2_details
+							-if (slides.image2_url_label && slides.image2_url_label != "")
+								a.btn.btn-large.btn-primary(href=slides.image2_url||"")=slides.image2_url_label
+			-if (slides.image3)
+				div.item
+					img(src='/files/' + slides.image3, alt='')
+					div.container
+						div.carousel-caption
+							-if (slides.image3_heading)
+								h1=slides.image3_heading
+							-if (slides.image3_details)
+								p.lead=slides.image3_details
+							-if (slides.image3_url_label && slides.image3_url_label != "")
+								a.btn.btn-large.btn-primary(href=slides.image3_url||"")=slides.image3_url_label
+			-if (slides.image4)
+				div.item
+					img(src='/files/' + slides.image4, alt='')
+					div.container
+						div.carousel-caption
+							-if (slides.image4_heading)
+								h1=slides.image4_heading
+							-if (slides.image4_details)
+								p.lead=slides.image4_details
+							-if (slides.image4_url_label && slides.image4_url_label != "")
+								a.btn.btn-large.btn-primary(href=slides.image4_url||"")=slides.image4_url_label
+	a.left.carousel-control(href='#evoCarousel', data-slide='prev') ‹
+	a.right.carousel-control(href='#evoCarousel', data-slide='next') ›
+div.container.marketing
+	div.row
+		div#newsletter.span4
+			img(src='/images/newsletter.jpg')
+			h3 Join The Evo Newsletter
+			p Like Evo? Subscribe to the Evo Newsletter to Discover Evo while earning points.
+			a(href='#') Join Now
+		-if(featured)
+			div#featured.span8
+				div#subCarousel.carousel.slide
+					div.carousel-inner
+						-if(featured.prod1)
+							div.item.active
+								div.span4
+									img(src='/files/' + featured.prod1.gallery[0])
+								div.span3
+									-if(featured.prod1.name && featured.prod1.name != "")
+										h3=featured.prod1.name
+									-if(featured.prod1.details && featured.prod1.details != "")
+										p=featured.prod1.details
+									a(href='#') View details »
+									div.pull-right.sharemenu
+										span.share-on Share
+										a(href='#')
+											i.icon-facebook-sign.icon-2x
+										a(href='#')
+											i.icon-twitter.icon-2x
+										a(href='#')
+											i.icon-pinterest.icon-2x
+						-if(featured.prod2)
+							div.item
+								div.span4
+									img(src='/files/' + featured.prod2.gallery[0])
+								div.span3
+									-if(featured.prod2.name && featured.prod2.name != "")
+										h3=featured.prod2.name
+									-if(featured.prod2.details && featured.prod2.details != "")
+										p=featured.prod2.details
+									a(href='#') View details »
+									div.pull-right.sharemenu
+										span.share-on Share
+										a(href='#')
+											i.icon-facebook-sign.icon-2x
+										a(href='#')
+											i.icon-twitter.icon-2x
+										a(href='#')
+											i.icon-pinterest.icon-2x
+						-if(featured.prod3)
+							div.item
+								div.span4
+									img(src='/files/' + featured.prod3.gallery[0])
+								div.span3
+									-if(featured.prod3.name && featured.prod3.name != "")
+										h3=featured.prod3.name
+									-if(featured.prod3.details && featured.prod3.details != "")
+										p=featured.prod3.details
+									a(href='#') View details »
+									div.pull-right.sharemenu
+										span.share-on Share
+										a(href='#')
+											i.icon-facebook-sign.icon-2x
+										a(href='#')
+											i.icon-twitter.icon-2x
+										a(href='#')
+											i.icon-pinterest.icon-2x
+						-if(featured.prod4)
+							div.item
+								div.span4
+									img(src='/files/' + featured.prod4.gallery[0])
+								div.span3
+									-if(featured.prod4.name && featured.prod4.name != "")
+										h3=featured.prod4.name
+									-if(featured.prod4.details && featured.prod4.details != "")
+										p=featured.prod4.details
+									a(href='#') View details »
+									div.pull-right.sharemenu
+										span.share-on Share
+										a(href='#')
+											i.icon-facebook-sign.icon-2x
+										a(href='#')
+											i.icon-twitter.icon-2x
+										a(href='#')
+											i.icon-pinterest.icon-2x
+					a.left.carousel-control(href='#subCarousel', data-slide='prev') ‹
+					a.right.carousel-control(href='#subCarousel', data-slide='next') ›
+	hr.featurette-divider
+	-if(popular)
+		div#popular-products.row
+			h2 Popular Products
+			-if(popular.prod1)
+				div.span3
+					img.img-circle(src='/files/' + popular.prod1.gallery[0])
+					-if(popular.prod1.name && popular.prod1.name != "")
+						h3=popular.prod1.name
+					-if(popular.prod1.price && popular.prod1.price != "")
+						h5=popular.prod1.price
+					-if(popular.prod1.details && popular.prod1.details != "")
+						p=popular.prod1.details
+					p
+						a(href='#') View details »
+			-if(popular.prod2)
+				div.span3
+					img.img-circle(src='/files/' + popular.prod2.gallery[0])
+					-if(popular.prod2.name && popular.prod2.name != "")
+						h3=popular.prod2.name
+					-if(popular.prod2.price && popular.prod2.price != "")
+						h5=popular.prod2.price
+					-if(popular.prod2.details && popular.prod2.details != "")
+						p=popular.prod2.details
+					p
+						a(href='#') View details »
+			-if(popular.prod3)
+				div.span3
+					img.img-circle(src='/files/' + popular.prod3.gallery[0])
+					-if(popular.prod3.name && popular.prod3.name != "")
+						h3=popular.prod3.name
+					-if(popular.prod3.price && popular.prod3.price != "")
+						h5=popular.prod3.price
+					-if(popular.prod3.details && popular.prod3.details != "")
+						p=popular.prod3.details
+					p
+						a(href='#') View details »
+			-if(popular.prod4)
+				div.span3
+					img.img-circle(src='/files/' + popular.prod4.gallery[0])
+					-if(popular.prod4.name && popular.prod4.name != "")
+						h3=popular.prod4.name
+					-if(popular.prod4.price && popular.prod4.price != "")
+						h5=popular.prod4.price
+					-if(popular.prod4.details && popular.prod4.details != "")
+						p=popular.prod4.details
+					p
+						a(href='#') View details »

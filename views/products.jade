@@ -1,0 +1,19 @@
+div.container.marketing
+	div#category-head.row
+		-if (featured)
+			div#category-summary.span3
+				h3 Featured Product
+				img(src='/files/mediumbig_' + featured.gallery[0])
+				h5=featured.name
+				p=featured.details
+		div#featured.span8
+			div#popular-products.row
+				h2 Categories
+				-each category in categories
+					-link = '/products/'+category.name.replace(/ /g,'-').toLowerCase()
+						a(href=link)
+							div.span4
+								img.img-circle(src='/files/mediumbig' + category.image)
+								h3
+									a(href=link)=category.name
+								p=category.tag
