@@ -85,31 +85,35 @@ cms.add('pages_homepage',{
 });
 
 cms.add('homepage_slides',{
-	image1:{type:'image',sizes:[{crop:true, prefix:"small_", height:500, width:1170}]},
-	image1_heading:{type:'string'},
-	image1_details:{type:'string'},
-	image1_url:{type:'string'},
-	image1_url_label:{type:'string'},
-	image2:{type:'image',sizes:[{crop:true, prefix:"small_", height:500, width:1170}]},
-	image2_heading:{type:'string'},
-	image2_details:{type:'string'},
-	image2_url:{type:'string'},
-	image2_url_label:{type:'string'},
-	image3:{type:'image',sizes:[{crop:true, prefix:"small_", height:500, width:1170}]},
-	image3_heading:{type:'string'},
-	image3_details:{type:'string'},
-	image3_url:{type:'string'},
-	image3_url_label:{type:'string'},
-	image4:{type:'image',sizes:[{crop:true, prefix:"small_", height:500, width:1170}]},
-	image4_heading:{type:'string'},
-	image4_details:{type:'string'},
-	image4_url:{type:'string'},
-	image4_url_label:{type:'string'}
+	single:true,
+	fields:{
+		image1:{type:'image', manualcrop:false, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
+		image1_heading:{type:'string'},
+		image1_details:{type:'string'},
+		image1_url:{type:'string'},
+		image1_url_label:{type:'string'},
+		image2:{type:'image', manualcrop:false, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
+		image2_heading:{type:'string'},
+		image2_details:{type:'string'},
+		image2_url:{type:'string'},
+		image2_url_label:{type:'string'},
+		image3:{type:'image', manualcrop:false, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
+		image3_heading:{type:'string'},
+		image3_details:{type:'string'},
+		image3_url:{type:'string'},
+		image3_url_label:{type:'string'},
+		image4:{type:'image', manualcrop:false, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
+		image4_heading:{type:'string'},
+		image4_details:{type:'string'},
+		image4_url:{type:'string'},
+		image4_url_label:{type:'string'}
+	}
 });
 
 cms.add('homepage_featured_products',{
 	//GENERATE GUI = false
 	single:true,
+	render:false,
 	fields:{
 		prod1:{type:'reference', collection:'main_product'},
 		prod2:{type:'reference', collection:'main_product'},
@@ -121,6 +125,7 @@ cms.add('homepage_featured_products',{
 cms.add('homepage_popular_products',{
 	//GENERATE GUI = false
 	single:true,
+	render:false,
 	fields:{
 		prod1:{type:'reference', collection:'main_product'},
 		prod2:{type:'reference', collection:'main_product'},

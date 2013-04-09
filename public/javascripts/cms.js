@@ -7,6 +7,12 @@ $(function(){
 		self.addClass('menu-selected');
 		
 		$("#loading").show();
+		if(self.attr("data-searchable") == 'false'){
+			console.log('d');
+			$("#component-search-container").hide();
+		}else{
+			$("#component-search-container").show();
+		}
 		if(self.attr("static-load")){
 			cms.clearComponents();
 			
@@ -23,8 +29,16 @@ $(function(){
 			$("#loading").hide();
 			var schema = res.schema;
 			cms.clearComponents();
-			cms.addComponents(res,name);
-			cms.addComponent('new-item', null, schema, undefined, res.components);
+			if(res.statics.single == true){
+				if(res.docs.length > 0){
+					cms.addComponents(res,name);
+				}else{
+					cms.addComponent('new-item', null, schema, undefined, res.components);
+				}
+			}else{
+				cms.addComponents(res,name);
+				cms.addComponent('new-item', null, schema, undefined, res.components);
+			}
 			//TODO: only for wizard 
 			//var id = ""+label + type + (Math.random() * 10000000 +1 << .1).toString(16);
 			
@@ -109,6 +123,9 @@ $(function(){
 	$("body").on("change", "input[cms-type=images],input[cms-type=image]", function(e){
 		var files = this.files;
 		var input = $(this);
+		if(input.attr("cms-crop") == "false"){
+			return;
+		}
 		$("#image_crop_pics").html('');
 		for(var i=0; i<files.length; i++){
 			 var anyWindow = window.URL || window.webkitURL;
@@ -309,10 +326,16 @@ var cms = {
 			case "image":
 				if(data)
 					extra.push(jade.render('image-thumbs',{image:data}));
+				if(schema.manualcrop == false){
+					dom.attr("cms-crop", "false");
+				}
 				break;
 			case "images":
 				if(data)
 					extra.push(jade.render('image-thumbs',{image:data, label:label}));
+				if(schema.manualcrop == false){
+					dom.attr("cms-crop", "false");
+				}
 				break;
 			case "component":
 				dom.append(jade.render('components',{components:data}));
