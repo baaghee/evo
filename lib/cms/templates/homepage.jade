@@ -1,11 +1,19 @@
 div.span8
-	h4 Carousel
-	div.row.slider-pic
-		-var src;
-		div.span2
-			a(href='#carouselModal',role='button',data-toggle='modal')
-				-if(homepage_slides== null){image1="http://placehold.it/140x140"; image1_heading=""; image1_details=""; image1_url="";image1_url_label=""; _id="";}
-				img.img-polaroid(image1, data-heading=image1_heading, data-details=image1_details, data-url=image1_url, data-url_label=image1_url_label, cms-id=_id, cms-field='image1')
+	//
+		h4 Carousel
+		div.row.slider-pic
+			div.span2
+				a(href='#carouselModal',role='button',data-toggle='modal')
+					img.img-polaroid(src="/files/"+homepage_slides.image1, data-heading=homepage_slides.image1_heading, data-details=homepage_slides.image1_details, data-url=homepage_slides.image1_url, data-url_label=homepage_slides.image1_url_label, cms-id=homepage_slides._id, cms-field='image1')
+			div.span2
+				a(href='#carouselModal',role='button',data-toggle='modal')
+					img.img-polaroid(src="/files/"+homepage_slides.image2, data-heading=homepage_slides.image2_heading, data-details=homepage_slides.image2_details, data-url=homepage_slides.image2_url, data-url_label=homepage_slides.image2_url_label, cms-id=homepage_slides._id, cms-field='image2')
+			div.span2
+				a(href='#carouselModal',role='button',data-toggle='modal')
+					img.img-polaroid(src="/files/"+homepage_slides.image3, data-heading=homepage_slides.image3_heading, data-details=homepage_slides.image3_details, data-url=homepage_slides.image3_url, data-url_label=homepage_slides.image3_url_label, cms-id=homepage_slides._id, cms-field='image3')
+			div.span2
+				a(href='#carouselModal',role='button',data-toggle='modal')
+					img.img-polaroid(src="/files/"+homepage_slides.image4, data-heading=homepage_slides.image4_heading, data-details=homepage_slides.image4_details, data-url=homepage_slides.image4_url, data-url_label=homepage_slides.image4_url_label, cms-id=homepage_slides._id, cms-field='image4')
 	h4 Featured Products
 	div.row.featured-pic
 		-var src;
