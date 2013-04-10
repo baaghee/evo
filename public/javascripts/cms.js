@@ -1,7 +1,6 @@
 var crops = [];
 $(function(){
 	$('.cms-load').on('click','li',function(e){
-		$(cms.settings.componentsblock).html('');
 		var self = $(this);
 		var name = self.attr('cms-name');
 		$('.menu-selected').removeClass('menu-selected');
@@ -334,6 +333,7 @@ var cms = {
 	},
 	clearComponents:function clearComponents(){
 		$(cms.settings.components).html('');
+		$(cms.settings.componentsblock).html('');
 	},
 	renderField:function(label,schema, data){
 		var type = schema.type;
