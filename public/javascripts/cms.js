@@ -131,6 +131,7 @@ $(function(){
 			 var anyWindow = window.URL || window.webkitURL;
 			 $("#image_crop_pics").append("<img data-name='"+(files[i].name ||files[i].fileName) +"' src='"+anyWindow.createObjectURL(files[i])+"' />");
 		}
+		var aspect_ratio = input.attr("cms-maintain-ratio") == "false" ? 0 : 1;
 		$("#image_crop_pics img").each(function(){
 			var obj = {};
 			obj.el = $(this);
@@ -139,7 +140,7 @@ $(function(){
 				bgFade:     true,
 				bgOpacity: .2,
 				setSelect: [ 60, 70, 300, 300 ],
-				aspectRatio: 1
+				aspectRatio: aspect_ratio
 			}, function(){
 				obj.crop =  this;
 			});
@@ -329,6 +330,9 @@ var cms = {
 				if(schema.manualcrop == false){
 					dom.attr("cms-crop", "false");
 				}
+				if(schema.maintain_ratio == false){
+					dom.attr("cms-maintain-ratio", "false");
+				}
 				break;
 			case "images":
 				if(data)
@@ -336,13 +340,16 @@ var cms = {
 				if(schema.manualcrop == false){
 					dom.attr("cms-crop", "false");
 				}
+				if(schema.maintain_ratio == false){
+					dom.attr("cms-maintain-ratio", "false");
+				}
 				break;
 			case "component":
 				dom.append(jade.render('components',{components:data}));
 				break;
 		}
 		//var html = '<div class="control-group"><label class="control-label">'+ label +'</label><div class="controls">'+ dom[0].outerHTML + extra.join('') +'</div></div>';
-		var html = $('<div class="control-group"><label class="control-label">'+ label +'</label><div class="controls"></div></div>');
+		var html = $('<div class="control-group"><label class="control-label" style="text-transform:capitalize">'+ label.split("_").join(" ") +'</label><div class="controls"></div></div>');
 		html.find('.controls').append(dom);
 		html.find('.controls').append(extra.join(''));
 		

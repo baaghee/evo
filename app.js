@@ -44,7 +44,7 @@ cms.add('main_product',{
 		description:{type:'string', multi:true, rtl:true},
 		featured:{type:'boolean'},
 		popular:{type:'boolean'},
-		gallery:{type:'images', sizes:[
+		gallery:{type:'images', maintain_ratio:false, sizes:[
 			{
 				prefix:"small_",
 				height:50,
