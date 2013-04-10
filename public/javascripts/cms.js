@@ -131,7 +131,27 @@ $(function(){
 			 var anyWindow = window.URL || window.webkitURL;
 			 $("#image_crop_pics").append("<img data-name='"+(files[i].name ||files[i].fileName) +"' src='"+anyWindow.createObjectURL(files[i])+"' />");
 		}
-		var aspect_ratio = input.attr("cms-maintain-ratio") == "false" ? 0 : 1;
+		//crop box size
+		var crop_size = [];
+		crop_size.push(60);
+		crop_size.push(70);
+		var crop_sizes = input.attr("cms-crop-ratio");
+		
+		crop_sizes = crop_sizes ? JSON.parse(crop_sizes) : void 0;
+		if(crop_sizes){
+			crop_size.push((crop_sizes[1] / 2) << .1);
+			crop_size.push((crop_sizes[0]/2) << .1);
+		}else{
+			crop_size.push(300);		
+			crop_size.push(300);		
+		}
+		var aspect_ratio = input.attr("cms-maintain-ratio");
+		if(crop_sizes){
+			aspect_ratio = crop_sizes[1]/crop_sizes[0];
+		}else{
+			aspect_ratio = aspect_ratio ? 1 : 0;
+		}
+		debugger;
 		$("#image_crop_pics img").each(function(){
 			var obj = {};
 			obj.el = $(this);
@@ -139,7 +159,7 @@ $(function(){
 			$(this).Jcrop({
 				bgFade:     true,
 				bgOpacity: .2,
-				setSelect: [ 60, 70, 300, 300 ],
+				setSelect: crop_size,
 				aspectRatio: aspect_ratio
 			}, function(){
 				obj.crop =  this;
@@ -333,6 +353,10 @@ var cms = {
 				if(schema.maintain_ratio == false){
 					dom.attr("cms-maintain-ratio", "false");
 				}
+				if(schema.crop_height && schema.crop_width){
+					dom.attr("cms-crop-ratio", "["+schema.crop_height+","+schema.crop_width+"]");
+				}
+				
 				break;
 			case "images":
 				if(data)
@@ -342,6 +366,9 @@ var cms = {
 				}
 				if(schema.maintain_ratio == false){
 					dom.attr("cms-maintain-ratio", "false");
+				}
+				if(schema.crop_height && schema.crop_width){
+					dom.attr("cms-crop-ratio", "["+schema.crop_height+","+schema.crop_width+"]");
 				}
 				break;
 			case "component":
