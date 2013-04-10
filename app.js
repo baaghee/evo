@@ -36,6 +36,10 @@ cms.add('main_subcategory',{
 });
 cms.add('main_product',{
 	searchable:true,
+	view:{
+		type:'block',
+		image:'gallery'
+	},
 	fields:{
 		name:{type:'string'},
 		details:{type:'string', multi:true},

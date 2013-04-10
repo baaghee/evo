@@ -33,9 +33,18 @@ section.row
 		section.span10#component-search-container
 			section.well
 				input(type='text', placeholder='Search...')#component-search
+		section#componentsblock.span10
 		section#components.span10
+//auto modals
+div#__componentblockmodal.modal.hide.fade(tabindex='-1',role='dialog',aria-hidden='true',style='display: none;')
+	div.modal-header
+		button.close(type='button',data-dismiss='modal',aria-hidden='true') ×
+		h4 Edit product
+	div.modal-body(style='height:600px')
+		div#__componentblockmodal_content
 
-//modals
+
+//manual modals
 
 div#carouselModal.modal.hide.fade(tabindex='-1',role='dialog',aria-labelledby='myModalLabel',aria-hidden='true',style='display: none;')
 	div.modal-header

@@ -1,6 +1,7 @@
 var crops = [];
 $(function(){
 	$('.cms-load').on('click','li',function(e){
+		$(cms.settings.componentsblock).html('');
 		var self = $(this);
 		var name = self.attr('cms-name');
 		$('.menu-selected').removeClass('menu-selected');
@@ -24,6 +25,8 @@ $(function(){
 			});
 			return;
 		}
+		//block view
+
 		$("#component-search").attr('cms-name', name);
 		cms.fetch(name, function(res){
 			$("#loading").hide();
@@ -168,8 +171,20 @@ $(function(){
 		});
 		$("#imageCropModal").modal('show');
 	});
-	$("#image_crop_set").on('click', function(){
-		//crops.
+	$("body").on("click", "#componentsblock div", function(){
+		var self = $(this);
+		var template = self.attr("data-template");
+		var options = JSON.parse(self.attr("data-options"));
+		var schema = JSON.parse(self.attr("data-schema"));
+		var data = JSON.parse(self.attr("data-data"));
+		//var components = JSON.parse(self.attr("data-components"));
+		var html = cms.renderComponent(template, options, schema, data);
+				
+		$("#__componentblockmodal_content").html('').append(html);
+		$("#__componentblockmodal").modal('show');
+		
+
+		
 	});
 	//custom
 	
@@ -257,6 +272,7 @@ $(function(){
 var cms = {
 	settings:{
 		components:"#components",
+		componentsblock:"#componentsblock",
 		dom_types:{
 			image:'<input type="file" />',
 			images:'<input type="file" multiple="multiple" />',
@@ -283,13 +299,26 @@ var cms = {
 		}
 		return dom;
 	},
-	addComponent:function addComponent(template, options, schema, data, components){
+	addComponent:function addComponent(template, options, schema, data, components, statics){
 		var html = cms.renderComponent(template, options, schema, data, components);
-		$(cms.settings.components).append(html);
+		html = $(html);
+		if(statics && statics.view && statics.view.type == 'block'){
+			html.hide();
+			var attrs = [
+				"data-template='"+ template +"'",
+				"data-options='"+ JSON.stringify(options) +"'",
+				"data-schema='"+ JSON.stringify(schema) +"'",
+				"data-data='"+ JSON.stringify(data) +"'",
+				"data-components='"+ JSON.stringify(components) +"'",
+			];
+			$(cms.settings.componentsblock).append("<div "+attrs.join(" ")+" style='cursor:pointer;text-align: center;border: solid 1px #c0c0c0;padding-bottom: 25px;border-radius: 3px;margin-bottom:25px' class='span3'><h5>"+data.name+"</h5><img style='width:170px' src='/files/medium_"+data.gallery[0]+"' /></div>");
+		}else{
+			$(cms.settings.components).append(html);
+		}
 	},
 	addComponents:function addComponents(components,feature){
 		_.each(components.docs,function(e,i){
-			cms.addComponent('item',{name:e.name,id:feature + "_" + e._id,_id:e._id,feature:feature},components.schema,e,components.components);
+			cms.addComponent('item',{name:e.name,id:feature + "_" + e._id,_id:e._id,feature:feature},components.schema,e,components.components, components.statics);
 		});
 	},
 	generateFieldDom:function(schema){
