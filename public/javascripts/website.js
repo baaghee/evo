@@ -15,7 +15,7 @@ $(function(){
 			url += '/since/' + since;
 		}
 		$.getJSON(url, function(res){
-			if(res.length < 100){
+			if(res.length < 10){
 				$('#all-more').hide();
 			}
 			var html = '';
