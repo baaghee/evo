@@ -1,11 +1,12 @@
-ul.breadcrumb
-	li
-		a(href='/') Home
-		span.divider /
-	li
-		a(href='/products') Products
-		span.divider /
-	li.active=category.name
+div.container.navbar-wrapper(style='margin-top:105px')
+	ul.breadcrumb
+		li
+			a(href='/') Home
+			span.divider /
+		li
+			a(href='/products') Products
+			span.divider /
+		li.active=category.name
 section.container.marketing
 	section#category-head.row
 		section#category-summary.span3

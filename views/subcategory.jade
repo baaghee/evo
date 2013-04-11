@@ -1,16 +1,16 @@
 script(src='/javascripts/masonry.js')
-
-ul.breadcrumb
-	li
-		a(href='/') Home
-		span.divider /
-	li
-		a(href='/products') Products
-		span.divider /
-	li
-		a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
-		span.divider /
-	li.active=nav.subcategory
+div.container.navbar-wrapper(style='margin-top:105px')
+	ul.breadcrumb
+		li
+			a(href='/') Home
+			span.divider /
+		li
+			a(href='/products') Products
+			span.divider /
+		li
+			a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
+			span.divider /
+		li.active=nav.subcategory
 div.container.marketing
 	div#category-head.row
 			-if(typeof latest != 'undefined')

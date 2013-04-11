@@ -166,6 +166,24 @@ cms.add('pages_jobs',{
 		photos:{type:'images'}
 	}
 });
+cms.add('pages_contact',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+		photos:{type:'images'}
+	}
+});
 
 cms.add('homepage_slides',{
 	single:true,
@@ -364,7 +382,12 @@ app.get('/products/:category/:subcategory/:product', function(req,res){
 });
 app.get('/:page', function(req,res){
 	var target = {
-		'services':'pages_services'
+		'services':'pages_services',
+		'contact':'pages_contact',
+		'returns':'pages_returns',
+		'business':'pages_business',
+		'business-idea':'pages_businessidea',
+		'jobs':'pages_jobs'
 	};
 	var page = req.params.page;
 	if(typeof cms[target[page]] == 'undefined'){
