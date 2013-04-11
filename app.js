@@ -247,6 +247,31 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   app.use(express.session({secret:"herro",store: new RedisStore, cookie: { maxAge: 600000000 ,httpOnly: false, secure: false}}));
+  app.use(function(req,res,next){
+  	if(app.menus){
+  		return next();
+  	}
+	cms.main_subcategory.find({}, {name:1, category:1}, function(err, docs){
+		if(err) throw err;
+		var cats = {};
+		docs.forEach(function(cat){
+			if(typeof cats[cat.category] == 'undefined'){
+				cats[cat.category] = {};
+				cats[cat.category].name = cat.category;
+				cats[cat.category].url = '/products/' + cat.category.replace(/ /g,'-').toLowerCase();
+			}
+			if(typeof cats[cat.category].subcats == 'undefined'){
+				cats[cat.category].subcats = [];
+			}
+			cats[cat.category].subcats.push({
+				name:cat.name,
+				url:'/products/' + cat.category.replace(/ /g,'-').toLowerCase() + '/' + cat.name.replace(/ /g,'-').toLowerCase()
+			});
+		});
+		app.menus = cats;
+		next();
+	});  
+  });
   app.use(app.router);
 
 });
@@ -261,6 +286,7 @@ app.configure('production', function(){
 });
 
 // Routes
+
 
 app.get('/', function(req, res){
 	//slides

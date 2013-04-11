@@ -33,78 +33,18 @@ html(lang='en')
 						ul.nav
 							li.active
 								a(href='/products') Products
-							li.dropdown
-								a.dropdown-toggle(href='#', data-toggle='dropdown')
-									| Living Room
-									b.caret
-								ul.dropdown-menu
-									li
-										a(href='category.html') Sofas & armchairs
-									li
-										a(href='category.html') TV & media furniture
-									li
-										a(href='category.html') Living room storage
-									li
-										a(href='category.html') Coffee & side tables
-									li
-										a(href='category.html') Living room lighting
-									li
-										a(href='category.html') Living room textiles & rugs
-									li.divider
-									li
-										a(href='sub.html') All products
-							li.dropdown
-								a.dropdown-toggle(href='#', data-toggle='dropdown')
-									| Bedroom
-									b.caret
-								ul.dropdown-menu
-									li
-										a(href='category.html') Beds
-									li
-										a(href='category.html') Bedroom storage
-									li
-										a(href='category.html') Lighting
-									li
-										a(href='category.html') Textiles & rugs
-									li
-										a(href='category.html') Mirrors
-									li.divider
-									li
-										a(href='sub.html') All products
-							li.dropdown
-								a.dropdown-toggle(href='#', data-toggle='dropdown')
-									| Kitchen & Appliances
-									b.caret
-								ul.dropdown-menu
-									li
-										a(href='category.html') Kitchen cabinets & fronts
-									li
-										a(href='category.html') Interior organizers
-									li
-										a(href='category.html') Appliances
-									li
-										a(href='category.html') Free-standing kitchens
-									li
-										a(href='category.html') Countertops
-									li
-										a(href='category.html') Kitchen faucets & sinks
-									li
-										a(href='category.html') Wall storage
-									li
-										a(href='category.html') Wall panels
-									li
-										a(href='category.html') Kitchen islands & carts
-									li
-										a(href='category.html') Step stools & step ladders
-									li
-										a(href='category.html') Kitchen integrated lighting
-									li
-										a(href='category.html') Knobs & lighting
-									li.divider
-									li
-										a(href='sub.html') All products
-							li
-								a(href='#contact') Textiles and Rugs
+							-for(var menu in app.menus){
+								li.dropdown
+									a.dropdown-toggle(href='#', data-toggle='dropdown')=app.menus[menu].name
+										b.caret
+									ul.dropdown-menu
+										-each sub in app.menus[menu].subcats
+											li
+												a(href=sub.url)=sub.name
+										li.divider
+										li
+											a(href=app.menus[menu].url) All products
+							-}
 		div#contents!=body
 		hr.featurette-divider
 		footer
