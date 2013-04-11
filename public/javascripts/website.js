@@ -6,7 +6,8 @@ $(function(){
 	});
 	
 	$("body").on('click', '#all-more', function(){
-		var url = window.location + '/all';
+		var location = window.location.href.substr(window.location.href.length-1, 1) == "/"  ? window.location.href.substr(0,window.location.href.length-1) : window.location.href;
+		var url = location + '/all';
 		var last = $("#all-products > div:last");
 		var since;
 		if(last.length > 0){
@@ -22,7 +23,7 @@ $(function(){
 				var data = [
 				'<div class="span3" data-id="'+item._id+'">'+
 				'<img src="/files/medium_'+item.gallery[0]+'">'+
-				'<a href="'+window.location + '/' + item.name.replace(/ /g, '-').toLowerCase()+'"><h4>'+item.name+'</h4></a>'+
+				'<a href="'+location + '/' + item.name.replace(/ /g, '-').toLowerCase()+'"><h4>'+item.name+'</h4></a>'+
 				'<h5>'+item.price+'</h5></div>'
 				]
 				html += data.join('');
