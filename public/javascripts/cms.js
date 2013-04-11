@@ -180,8 +180,8 @@ $(function(){
 		var html = cms.renderComponent(template, options, schema, data);
 				
 		$("#__componentblockmodal_content").html('').append(html);
+		html.find('.accordion-body').removeClass('collapse').css('height', 'auto');
 		$("#__componentblockmodal").modal('show');
-		
 
 		
 	});
@@ -277,7 +277,7 @@ var cms = {
 			images:'<input type="file" multiple="multiple" />',
 			file:'<input type="file" />',
 			string:'<input type="text" />',
-			boolean:'<input type="checkbox" />',
+			boolean:'<div class="switch" data-on-label="<i class=\'icon-ok icon-white\'></i>" data-off-label="<i class=\'icon-remove\'></i>">    <input type="checkbox"></div>',
 			component:'<div />',
 			timestamp:'<input type="text" />',
 			string_thaana:'<textarea class="thaana thaana-textarea"></textarea>',
@@ -319,6 +319,9 @@ var cms = {
 		_.each(components.docs,function(e,i){
 			cms.addComponent('item',{name:e.name,id:feature + "_" + e._id,_id:e._id,feature:feature},components.schema,e,components.components, components.statics);
 		});
+		if(components.docs.length == 1){
+			$(cms.settings.components).find('.accordion-body').removeClass('collapse').css('height', 'auto');
+		}
 	},
 	generateFieldDom:function(schema){
 		var type = schema.type;
@@ -361,9 +364,10 @@ var cms = {
 				dom.attr('value',data);
 				break;
 			case "boolean":
-				if(data){
-					dom.attr("checked", "checked");
+				if(data == true){
+					dom.find("input").attr("checked", "checked");
 				}
+				dom.bootstrapSwitch();
 				break;
 			case "string_thaana":
 				dom.thaana();
@@ -491,8 +495,9 @@ var cms = {
 			if(type == "timestamp")
 				form.append(name, elem.val())
 				
-			if(type == "boolean")
-				form.append(name, elem.val())
+			if(type == "boolean"){
+				form.append(name, elem.bootstrapSwitch('status'))
+			}
 				
 			if(type == "string_thaana")
 				form.append(name, elem.is(":checked"))
