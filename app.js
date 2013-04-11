@@ -247,7 +247,22 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   app.use(express.session({secret:"herro",store: new RedisStore, cookie: { maxAge: 600000000 ,httpOnly: false, secure: false}}));
-  app.use(function(req,res,next){
+  app.use(app.router);
+
+});
+cms.listen(app);
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler());
+});
+
+// Routes
+
+function menu(fn){
 	cms.main_subcategory.find({}, {name:1, category:1}, function(err, docs){
 		if(err) throw err;
 		var cats = {};
@@ -265,25 +280,9 @@ app.configure(function(){
 				url:'/products/' + cat.category.replace(/ /g,'-').toLowerCase() + '/' + cat.name.replace(/ /g,'-').toLowerCase()
 			});
 		});
-		app.menus = cats;
-		next();
+		fn(cats);
 	});  
-  });
-  app.use(app.router);
-
-});
-cms.listen(app);
-
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function(){
-  app.use(express.errorHandler());
-});
-
-// Routes
-
+};
 
 app.get('/', function(req, res){
 	//slides
@@ -301,7 +300,10 @@ app.get('/', function(req, res){
 			.populate('prod1 prod2 prod3 prod4')
 			.exec(function(err, featured){
 				index.featured = featured;
-				res.render('index', index);
+				menu(function(menu){
+					index.menus = menu;
+					res.render('index', index);
+				});
 			});
 		});
 	});
@@ -351,7 +353,10 @@ app.get('/products', function(req,res){
 			if(featured){
 				var feature_val = featured['prod'+((Math.random() * 4) << .5)];
 			}
-			res.render('products',{categories:categories, featured:feature_val});
+			
+			menu(function(menu){
+				res.render('products',{categories:categories, featured:feature_val, menus:menu});
+			});
 		});
 	});
 });
@@ -364,7 +369,9 @@ app.get('/products/:category', function(req,res){
 		if(cat){
 			cms.main_subcategory.find({category:query_category}, function(err, subcats){
 				if(err) throw err;
-				res.render('category',{category:cat, subcategories:subcats});
+				menu(function(menu){
+					res.render('category',{category:cat, subcategories:subcats, menus:menu});
+				});
 			});
 		}else{
 			return res.redirect('/');
@@ -399,7 +406,10 @@ app.get('/products/:category/:subcategory', function(req,res){
 			.limit(4)
 			.exec(function(err, popular){
 				var nav = {category:category, subcategory:subcategory, link:'/products/' + req.params.category + '/' + req.params.subcategory + '/'};
-				res.render('subcategory', {nav:nav, latest:latest, featured:featured, popular:popular, subcategory:req.params});
+
+				menu(function(menu){
+					res.render('subcategory', {nav:nav, latest:latest, featured:featured, popular:popular, subcategory:req.params, menus:menu});
+				});
 			});
 		});
 	});
@@ -430,7 +440,10 @@ app.get('/products/:category/:subcategory/:product', function(req,res){
 			.limit(8)
 			.exec(function(err, related){
 				var nav = {category:category, subcategory:subcategory, link:'/products/' + req.params.category + '/' + req.params.subcategory + '/'};
-				res.render('product', {product:product, popular:popular, related:related, nav:nav});
+
+				menu(function(menu){
+					res.render('product', {product:product, popular:popular, related:related, nav:nav, menus:menu});
+				});
 			});
 		});
 	});

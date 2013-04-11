@@ -33,17 +33,17 @@ html(lang='en')
 						ul.nav
 							li.active
 								a(href='/products') Products
-							-for(var menu in app.menus){
+							-for(var menu in menus){
 								li.dropdown
-									a.dropdown-toggle(href='#', data-toggle='dropdown')=app.menus[menu].name
+									a.dropdown-toggle(href='#', data-toggle='dropdown')=menus[menu].name
 										b.caret
 									ul.dropdown-menu
-										-each sub in app.menus[menu].subcats
+										-each sub in menus[menu].subcats
 											li
 												a(href=sub.url)=sub.name
 										li.divider
 										li
-											a(href=app.menus[menu].url) All products
+											a(href= menus[menu].url) All products
 							-}
 		div#contents!=body
 		hr.featurette-divider
