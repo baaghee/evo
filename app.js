@@ -21,7 +21,7 @@ cms.add('main_category',{
 		name:{type:'string'},
 		tag:{type:'string'},
 		description:{type:'string', multi:true},
-		image:{type:'image',sizes:[{prefix:"medium", width:270, height:270,}, {prefix:"mediumbig", width:370, height:370}]}
+		image:{type:'image', maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}, {prefix:"mediumbig", width:370, height:370}]}
 	}
 });
 cms.add('main_subcategory',{
@@ -31,7 +31,7 @@ cms.add('main_subcategory',{
 		category:{type:'string', source:'main_category.name', autocomplete:true},
 		tag:{type:'string'},
 		description:{type:'string', multi:true},
-		image:{type:'image',sizes:[{prefix:"medium", width:170, height:170}]}
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:170, height:170}]}
 	}
 });
 cms.add('main_product',{
@@ -48,7 +48,7 @@ cms.add('main_product',{
 		description:{type:'string', multi:true, rtl:true},
 		featured:{type:'boolean'},
 		popular:{type:'boolean'},
-		gallery:{type:'images', maintain_ratio:false, sizes:[
+		gallery:{type:'images', maintain_ratio:true, sizes:[
 			{
 				prefix:"small_",
 				height:50,
@@ -77,15 +77,94 @@ cms.add('main_product',{
 		]}
 	}
 });
-cms.add('pages_common',{
-	title:{type:'string'},
-	description:{type:'string', multi:true},
-	photos:{type:'images'}
+cms.add('pages_services',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+		photos:{type:'images'}
+	}
 });
-cms.add('pages_homepage',{
-	banners:{type:'images'},
-	featured_products:{type:'string'},
-	featured_categories:{type:'string'}
+cms.add('pages_returns',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+	}
+});
+cms.add('pages_business',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+		photos:{type:'images'}
+	}
+});
+cms.add('pages_businessidea',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+		photos:{type:'images'}
+	}
+});
+cms.add('pages_jobs',{
+	single:true,
+	fields:{
+		title:{type:'string'},
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
+		para_1_title:{type:'string'},
+		para_1_description:{type:'string', multi:true, rtl:true},
+		para_2_title:{type:'string'},
+		para_2_description:{type:'string', multi:true, rtl:true},
+		para_3_title:{type:'string'},
+		para_3_description:{type:'string', multi:true, rtl:true},
+		para_4_title:{type:'string'},
+		para_4_description:{type:'string', multi:true, rtl:true},
+		para_5_title:{type:'string'},
+		para_5_description:{type:'string', multi:true, rtl:true},
+		photos:{type:'images'}
+	}
 });
 
 cms.add('homepage_slides',{
@@ -283,7 +362,22 @@ app.get('/products/:category/:subcategory/:product', function(req,res){
 		});
 	});
 });
-
+app.get('/:page', function(req,res){
+	var target = {
+		'services':'pages_services'
+	};
+	var page = req.params.page;
+	if(typeof cms[target[page]] == 'undefined'){
+		return res.end('haha');
+	}
+	cms[target[page]].findOne(function(err, page){
+		if(err) throw err;
+		if(!page){
+			return res.redirect('/');
+		}
+		res.render('page', page);
+	});
+});
 //custom cms
 app.get('/cms/products/:name', function(req, res){
 	cms.main_product.find({name:new RegExp(req.params.name, "gi")}, function(err, prod){
@@ -306,7 +400,6 @@ app.get('/products/:category/:subcategory/all', function(req, res){
 	});
 	
 });
-
 
 app.listen(arg.p || 3010, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -1,0 +1,34 @@
+div.container.marketing
+	div#category-head.row
+		div#category-summary.span3
+			h3=title
+			img(src='/files/medium' + image)
+			//h5=featured.name
+			//p=featured.details
+		div#featured.span8
+			div.para
+				-if(para_1_title && para_1_title != "")
+					h2=para_1_title
+				-if(para_1_description && para_1_description != "")
+					p!=para_1_description
+			div.para
+				-if(para_2_title && para_2_title != "")
+					h2=para_2_title
+				-if(para_2_description && para_2_description != "")
+					p!=para_2_description
+			div.para
+				-if(para_3_title && para_3_title != "")
+					h2=para_3_title
+				-if(para_3_description && para_3_description != "")
+					p!=para_3_description
+			div.para
+				-if(para_4_title && para_4_title != "")
+					h2=para_4_title
+				-if(para_4_description && para_4_description != "")
+					p!=para_4_description
+			div.para
+				-if(para_5_title && para_5_title != "")
+					h2=para_5_title
+				-if(para_5_description && para_5_description != "")
+					p!=para_5_description
+
