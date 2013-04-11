@@ -248,9 +248,6 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
   app.use(express.session({secret:"herro",store: new RedisStore, cookie: { maxAge: 600000000 ,httpOnly: false, secure: false}}));
   app.use(function(req,res,next){
-  	if(app.menus){
-  		return next();
-  	}
 	cms.main_subcategory.find({}, {name:1, category:1}, function(err, docs){
 		if(err) throw err;
 		var cats = {};
@@ -309,6 +306,36 @@ app.get('/', function(req, res){
 		});
 	});
 });
+app.get('/products/:category/:subcategory/all', function(req, res){
+	var category = req.params.category.replace(/-/g, ' ');
+	var subcategory = req.params.subcategory.replace(/-/g, ' ');
+	
+	var query_subcat = new RegExp(subcategory, 'gi');
+	cms.main_product
+	.find({subcategory: query_subcat},{gallery:1, price:1, name:1})
+	.sort({_id:-1})
+	.limit(100)
+	.exec(function(err, products){
+		if(err)throw err;
+		res.json(products);
+	});
+	
+});
+app.get('/products/:category/:subcategory/all/since/:id', function(req, res){
+	var category = req.params.category.replace(/-/g, ' ');
+	var subcategory = req.params.subcategory.replace(/-/g, ' ');
+	var id = req.params.id;
+	var query_subcat = new RegExp(subcategory, 'gi');
+	cms.main_product
+	.find({subcategory: query_subcat, _id:{$lt:id}},{gallery:1, price:1, name:1})
+	.sort({_id:-1})
+	.limit(100)
+	.exec(function(err, products){
+		if(err)throw err;
+		res.json(products);
+	});
+	
+});
 app.get('/products', function(req,res){
 	cms.main_category.find({}, function(err, categories){
 		if(err) throw err;
@@ -344,6 +371,7 @@ app.get('/products/:category', function(req,res){
 		}
 	});
 });
+
 app.get('/products/:category/:subcategory', function(req,res){
 	var category = req.params.category.replace(/-/g, ' ');
 	var subcategory = req.params.subcategory.replace(/-/g, ' ');
@@ -377,6 +405,7 @@ app.get('/products/:category/:subcategory', function(req,res){
 	});
 
 });
+
 app.get('/products/:category/:subcategory/:product', function(req,res){
 	var category = req.params.category.replace(/-/g, ' ');
 	var subcategory = req.params.subcategory.replace(/-/g, ' ');
@@ -434,21 +463,7 @@ app.get('/cms/products/:name', function(req, res){
 	});
 });
 
-app.get('/products/:category/:subcategory/all', function(req, res){
-	var category = req.params.category.replace(/-/g, ' ');
-	var subcategory = req.params.subcategory.replace(/-/g, ' ');
-	var product = req.params.product.replace(/-/g, ' ');
-	
-	var query_subcat = new RegExp(subcategory, 'gi');
-	var query_product = new RegExp(product, 'gi');
-	cms.main_product
-	.find({subcategory: query_subcat})
-	.sort({_id:-1})
-	.exec(function(err, products){
-		
-	});
-	
-});
+
 
 app.listen(arg.p || 3010, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
