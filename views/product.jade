@@ -1,20 +1,21 @@
 link(href="/stylesheets/jquery.jqzoom.css", rel="stylesheet")
 script(src='/javascripts/jquery.jqzoom-core.js')
 script //$(function(){ $("a#zoom").jqzoom({zoomWidth:100,zoomHeight:100, alwaysOn : true });});
-ul.breadcrumb(style='text-transform:capitalize')
-	li
-		a(href='/') Home
-		span.divider /
-	li
-		a(href='/products') Products
-		span.divider /
-	li
-		a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
-		span.divider /
-	li
-		a(href=nav.link)=nav.subcategory
-		span.divider /
-	li.active=product.name
+div.container.navbar-wrapper(style='margin-top:105px')
+	ul.breadcrumb(style='text-transform:capitalize')
+		li
+			a(href='/') Home
+			span.divider /
+		li
+			a(href='/products') Products
+			span.divider /
+		li
+			a(href='/products/'+nav.category.replace(/ /g, '-'))=nav.category
+			span.divider /
+		li
+			a(href=nav.link)=nav.subcategory
+			span.divider /
+		li.active=product.name
 div.container.marketing
 	div#category-head.row
 		div.row
