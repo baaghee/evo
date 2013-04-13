@@ -4,7 +4,11 @@ $(function(){
 		var pic = $(this).attr('data-pic');
 		$("#product_thumbs_large").attr('src', pic);
 	});
+
 	
+	//$("#all-products").masonry({itemSelector:'.span3'});
+	var masonry = false;
+
 	$("body").on('click', '#all-more', function(){
 		var location = window.location.href.substr(window.location.href.length-1, 1) == "/"  ? window.location.href.substr(0,window.location.href.length-1) : window.location.href;
 		var url = location + '/all';
@@ -15,7 +19,7 @@ $(function(){
 			url += '/since/' + since;
 		}
 		$.getJSON(url, function(res){
-			if(res.length < 10){
+			if(res.length < 5){
 				$('#all-more').hide();
 			}
 			var html = '';
@@ -28,8 +32,26 @@ $(function(){
 				]
 				html += data.join('');
 			});
+			html = $(html);
+			console.log(html);
 			$("#all-products").append(html);
+			if(masonry == false){
+				$("#all-products").imagesLoaded(function(){
+					$("#all-products").masonry({itemSelector:'.span3'})
+					masonry = true;
+				});
+			}else
+			$("#all-products").imagesLoaded(function(){
+				$("#all-products").masonry('reload');
+			});
+			//window.scrollTo(0,document.body.scrollHeight);
+			
 		});
+	});
+	var scrolling = false;
+	$(window, 'html').scroll(function (e) {
+		var page_height = document.body.scrollHeight;
+		var current_position = window.pageYOffset;
 	});
 	$('#all-more').trigger('click');
 });

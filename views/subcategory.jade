@@ -1,4 +1,6 @@
 script(src='/javascripts/masonry.js')
+script(src='/javascripts/jquery.infinitescroll.min.js')
+script(src='/javascripts/jquery.imagesloaded.min.js')
 div.container.navbar-wrapper(style='margin-top:105px; z-index:auto')
 	ul.breadcrumb
 		li
@@ -60,7 +62,7 @@ div.container.marketing
 								p
 									a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
 	hr.featurette-divider
-	h2 Living Room Furnitures
+	h2=nav.subcategory
 	div#all-products.row
 		br.clear
-	div#all-more.btn.btn-block() More
+div#all-more.btn.btn-block More
