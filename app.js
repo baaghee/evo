@@ -316,7 +316,7 @@ app.get('/products/:category/:subcategory/all', function(req, res){
 	cms.main_product
 	.find({subcategory: query_subcat},{gallery:1, price:1, name:1})
 	.sort({_id:-1})
-	.limit(5)
+	.limit(10)
 	.exec(function(err, products){
 		if(err)throw err;
 		res.json(products);
@@ -331,7 +331,7 @@ app.get('/products/:category/:subcategory/all/since/:id', function(req, res){
 	cms.main_product
 	.find({subcategory: query_subcat, _id:{$lt:id}},{gallery:1, price:1, name:1})
 	.sort({_id:-1})
-	.limit(5)
+	.limit(10)
 	.exec(function(err, products){
 		if(err)throw err;
 		res.json(products);
