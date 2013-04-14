@@ -18,7 +18,7 @@ section.container.marketing
 			section#popular-products.row
 				h2 Sub Categories
 				-each subcat in subcategories
-					-link = '/products/' + subcat.category.replace(/ /g, '-').toLowerCase() + '/' + subcat.name.replace(/ /g, '-').toLowerCase()
+					-link = '/products/' + subcat.category.name.replace(/ /g, '-').toLowerCase() + '/' + subcat.name.replace(/ /g, '-').toLowerCase()
 						a(href=link)
 							section.span2
 								img.img-circle(src="/files/medium" + subcat.image)

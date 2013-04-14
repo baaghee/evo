@@ -153,7 +153,6 @@ $(function(){
 		}else{
 			aspect_ratio = aspect_ratio ? 1 : 0;
 		}
-		debugger;
 		$("#image_crop_pics img").each(function(){
 			var obj = {};
 			obj.el = $(this);
@@ -273,6 +272,7 @@ var cms = {
 		components:"#components",
 		componentsblock:"#componentsblock",
 		dom_types:{
+			select:'<select />',
 			image:'<input type="file" />',
 			images:'<input type="file" multiple="multiple" />',
 			file:'<input type="file" />',
@@ -362,6 +362,15 @@ var cms = {
 				break;
 			case "timestamp":
 				dom.attr('value',data);
+				break;
+			case "select":
+				//dom.attr('value',data);
+				var field = schema.source.split('.')[1];
+				console.log(data);
+				for(var i=0; i<schema.data.length; i++){
+					var select = schema.data[i]['_id'] == data.id ? " selected " : " ";
+					dom.append("<option "+select+" value='"+schema.data[i]['_id']+":"+schema.data[i][field]+"'>" + schema.data[i][field] + "</option>");
+				}
 				break;
 			case "boolean":
 				if(data == true){
@@ -495,6 +504,13 @@ var cms = {
 			if(type == "timestamp")
 				form.append(name, elem.val())
 				
+			if(type == "select"){
+				var select = elem.val().split(":");
+				var select_name = select[1];
+				var select_val = select[0]
+				form.append(name, JSON.stringify({id:select_val, name:select_name}));
+			}
+				
 			if(type == "boolean"){
 				form.append(name, elem.bootstrapSwitch('status'))
 			}
@@ -511,6 +527,11 @@ var cms = {
 					if(elem.attr('cms-crop')){
 						form.append(name+"-crop", elem.attr('cms-crop'));
 					}
+				}
+			}
+			if(type == 'file'){
+				if(elem[0].files.length > 0){
+					form.append(name, elem[0].files[0].fileName || elem[0].files[0].name);
 				}
 			}
 			if(type == 'images'){

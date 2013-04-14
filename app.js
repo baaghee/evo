@@ -8,7 +8,7 @@ var express = require('express')
 var RedisStore = require('connect-redis')(express);
 var arg = require('optimist').argv;
 var app = module.exports = express.createServer();
-var _ = require('underscore')
+var _ = require('underscore');
 delete express.bodyParser.parse['multipart/form-data'];
 
 _.str = require('underscore.string');
@@ -28,7 +28,8 @@ cms.add('main_subcategory',{
 	searchable:true,
 	fields:{
 		name:{type:'string'},
-		category:{type:'string', source:'main_category.name', autocomplete:true},
+		//category:{type:'string', source:'main_category.name', autocomplete:true},
+		category:{type:'select', source:'main_category.name'},
 		tag:{type:'string'},
 		description:{type:'string', multi:true},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:170, height:170}]}
@@ -44,10 +45,12 @@ cms.add('main_product',{
 		name:{type:'string'},
 		details:{type:'string', multi:true},
 		price:{type:'string'},
-		subcategory:{type:'string', source:'main_subcategory.name', autocomplete:true},
+		//subcategory:{type:'string', source:'main_subcategory.name', autocomplete:true},
+		subcategory:{type:'select', source:'main_subcategory.name'},
 		description:{type:'string', multi:true, rtl:true},
 		featured:{type:'boolean'},
 		popular:{type:'boolean'},
+		catalog:{type:'file'},
 		gallery:{type:'images', maintain_ratio:true, sizes:[
 			{
 				prefix:"small_",
@@ -269,20 +272,33 @@ function menu(fn){
 		docs.forEach(function(cat){
 			if(typeof cats[cat.category] == 'undefined'){
 				cats[cat.category] = {};
-				cats[cat.category].name = cat.category;
-				cats[cat.category].url = '/products/' + cat.category.replace(/ /g,'-').toLowerCase();
+				cats[cat.category].name = cat.category.name;
+				cats[cat.category].url = '/products/' + cat.category.name.replace(/ /g,'-').toLowerCase();
 			}
 			if(typeof cats[cat.category].subcats == 'undefined'){
 				cats[cat.category].subcats = [];
 			}
 			cats[cat.category].subcats.push({
 				name:cat.name,
-				url:'/products/' + cat.category.replace(/ /g,'-').toLowerCase() + '/' + cat.name.replace(/ /g,'-').toLowerCase()
+				url:'/products/' + cat.category.name.replace(/ /g,'-').toLowerCase() + '/' + cat.name.replace(/ /g,'-').toLowerCase()
 			});
 		});
 		fn(cats);
 	});  
 };
+
+function getCategory(fn){
+	//console.log(p);
+	cms.main_subcategory.find({},{category:1}, function(err, subcats){
+		cms.main_category.find({}, {name:1}, function(err, cats){
+			var s = {};
+			subcats.forEach(function(su){
+				s[su.id] = _.find(cats, function(c){ return c._id.toString() == su.category.id });
+			});
+			fn(s);
+		});
+	});	
+}
 
 app.get('/', function(req, res){
 	//slides
@@ -302,7 +318,10 @@ app.get('/', function(req, res){
 				index.featured = featured;
 				menu(function(menu){
 					index.menus = menu;
-					res.render('index', index);
+					getCategory(function(categories){
+						index.categories = categories;
+						res.render('index', index);
+					});
 				});
 			});
 		});
@@ -365,9 +384,8 @@ app.get('/products/:category', function(req,res){
 	var query_category = new RegExp(category, 'gi');
 	cms.main_category.findOne({name:query_category}, function(err, cat){
 		if(err) throw err;
-		console.log(cat);
 		if(cat){
-			cms.main_subcategory.find({category:query_category}, function(err, subcats){
+			cms.main_subcategory.find({'category.name':query_category}, function(err, subcats){
 				if(err) throw err;
 				menu(function(menu){
 					res.render('category',{category:cat, subcategories:subcats, menus:menu});
@@ -387,7 +405,7 @@ app.get('/products/:category/:subcategory', function(req,res){
 	
 	var products = {};
 	//latest
-	cms.main_product.find({subcategory:query_subcat})
+	cms.main_product.find({'subcategory.name':query_subcat})
 	.sort({_id:-1})
 	.limit(2)
 	.exec(function(err, latest){
@@ -395,13 +413,13 @@ app.get('/products/:category/:subcategory', function(req,res){
 		products.latest = latest
 		//featured
 		cms.main_product
-		.find({subcategory: query_subcat, featured:true})
+		.find({'subcategory.name': query_subcat, featured:true})
 		.sort({_id:-1})
 		.limit(4)
 		.exec(function(err, featured){
 			//popular
 			cms.main_product
-			.find({subcategory: query_subcat, popular:true})
+			.find({'subcategory.name': query_subcat, popular:true})
 			.sort({_id:-1})
 			.limit(4)
 			.exec(function(err, popular){
@@ -424,19 +442,19 @@ app.get('/products/:category/:subcategory/:product', function(req,res){
 	var query_subcat = new RegExp(subcategory, 'gi');
 	var query_product = new RegExp(product, 'gi');
 
-	cms.main_product.findOne({subcategory: query_subcat, name:query_product}, function(err, product){
+	cms.main_product.findOne({'subcategory.name': query_subcat, name:query_product}, function(err, product){
 		if(!product){
 			return res.redirect('/');
 		}
 		//popular
 		cms.main_product
-		.find({subcategory: query_subcat, popular:true})
+		.find({'subcategory.name': query_subcat, popular:true})
 		.sort({_id:-1})
 		.limit(3)
 		.exec(function(err, popular){
 			//related
 			cms.main_product
-			.find({subcategory: query_subcat})
+			.find({'subcategory.name': query_subcat})
 			.limit(8)
 			.exec(function(err, related){
 				var nav = {category:category, subcategory:subcategory, link:'/products/' + req.params.category + '/' + req.params.subcategory + '/'};

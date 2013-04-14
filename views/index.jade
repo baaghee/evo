@@ -67,7 +67,7 @@ div.container.marketing
 										h3=featured.prod1.name
 									-if(featured.prod1.details && featured.prod1.details != "")
 										p=featured.prod1.details
-									a(href='#') View details »
+									a(href='/products/' + categories[featured.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
 									div.pull-right.sharemenu
 										span.share-on Share
 										a(href='#')
@@ -85,7 +85,7 @@ div.container.marketing
 										h3=featured.prod2.name
 									-if(featured.prod2.details && featured.prod2.details != "")
 										p=featured.prod2.details
-									a(href='#') View details »
+									a(href='/products/' + categories[featured.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod2.name.replace(/ /g,'-').toLowerCase()) View details »
 									div.pull-right.sharemenu
 										span.share-on Share
 										a(href='#')
@@ -103,7 +103,7 @@ div.container.marketing
 										h3=featured.prod3.name
 									-if(featured.prod3.details && featured.prod3.details != "")
 										p=featured.prod3.details
-									a(href='#') View details »
+									a(href='/products/' + categories[featured.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod3.name.replace(/ /g,'-').toLowerCase()) View details »
 									div.pull-right.sharemenu
 										span.share-on Share
 										a(href='#')
@@ -121,7 +121,7 @@ div.container.marketing
 										h3=featured.prod4.name
 									-if(featured.prod4.details && featured.prod4.details != "")
 										p=featured.prod4.details
-									a(href='#') View details »
+									a(href='/products/' + categories[featured.prod4.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.name.replace(/ /g,'-').toLowerCase()) View details »
 									div.pull-right.sharemenu
 										span.share-on Share
 										a(href='#')
@@ -146,7 +146,7 @@ div.container.marketing
 					-if(popular.prod1.details && popular.prod1.details != "")
 						p=popular.prod1.details
 					p
-						a(href='#') View details »
+						a(href='/products/' + categories[popular.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod2)
 				div.span3
 					img.img-circle(src='/files/' + popular.prod2.gallery[0])
@@ -157,7 +157,7 @@ div.container.marketing
 					-if(popular.prod2.details && popular.prod2.details != "")
 						p=popular.prod2.details
 					p
-						a(href='#') View details »
+						a(href='/products/' + categories[popular.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod3)
 				div.span3
 					img.img-circle(src='/files/' + popular.prod3.gallery[0])
@@ -168,7 +168,7 @@ div.container.marketing
 					-if(popular.prod3.details && popular.prod3.details != "")
 						p=popular.prod3.details
 					p
-						a(href='#') View details »
+						a(href='/products/' + categories[popular.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod4)
 				div.span3
 					img.img-circle(src='/files/' + popular.prod4.gallery[0])
@@ -179,4 +179,4 @@ div.container.marketing
 					-if(popular.prod4.details && popular.prod4.details != "")
 						p=popular.prod4.details
 					p
-						a(href='#') View details »
+						a(href='/products/' + categories[popular.prod4.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod4.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod4.name.replace(/ /g,'-').toLowerCase()) View details »
