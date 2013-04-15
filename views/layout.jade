@@ -33,17 +33,17 @@ html(lang='en')
 						ul.nav
 							li.active
 								a(href='/products') Products
-							-for(var menu in menus){
+							-for(var menu in menus.menus){
 								li.dropdown
-									a.dropdown-toggle(href='#', data-toggle='dropdown')=menus[menu].name
+									a.dropdown-toggle(href='#', data-toggle='dropdown')=menus.menus[menu].name
 										b.caret
 									ul.dropdown-menu
-										-each sub in menus[menu].subcats
+										-each sub in menus.menus[menu].subcats
 											li
 												a(href=sub.url)=sub.name
 										li.divider
 										li
-											a(href= menus[menu].url) All products
+											a(href= menus.menus[menu].url) All products
 							-}
 		div#contents!=body
 		hr.featurette-divider
@@ -63,25 +63,22 @@ html(lang='en')
 				div.span3
 					h5 Customer Relations
 					ul.unstyled
-						li
-							a(href='/services') EVO Services
-						li
-							a(href='/contact') Contact Us
-						li
-							a(href='/returns') Returns Policy
+						-each page in menus.footer.customer_relations
+							li
+								a(href='/customer-relations/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 
 				div.span3
 					h5 About EVO
 					ul.unstyled
-						li
-							a(href='/business-idea') Our Business Idea
-						li
-							a(href='/business') EVO Business
+						-each page in menus.footer.about
+							li
+								a(href='/about/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 				div.span3
 					h5 Working at EVO
 					ul.unstyled
-						li
-							a(href='/jobs') Jobs Available
+						-each page in menus.footer.working
+							li
+								a(href='/working/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 			div#copyright.row
 				p.pull-right
 					a(href='#') Back to top

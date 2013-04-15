@@ -80,10 +80,9 @@ cms.add('main_product',{
 		]}
 	}
 });
-cms.add('pages_services',{
-	single:true,
+cms.add('pages_customer_relations',{
 	fields:{
-		title:{type:'string'},
+		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
 		para_1_title:{type:'string'},
 		para_1_description:{type:'string', multi:true, rtl:true},
@@ -98,27 +97,10 @@ cms.add('pages_services',{
 		photos:{type:'images'}
 	}
 });
-cms.add('pages_returns',{
-	single:true,
+
+cms.add('pages_about',{
 	fields:{
-		title:{type:'string'},
-		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
-		para_1_title:{type:'string'},
-		para_1_description:{type:'string', multi:true, rtl:true},
-		para_2_title:{type:'string'},
-		para_2_description:{type:'string', multi:true, rtl:true},
-		para_3_title:{type:'string'},
-		para_3_description:{type:'string', multi:true, rtl:true},
-		para_4_title:{type:'string'},
-		para_4_description:{type:'string', multi:true, rtl:true},
-		para_5_title:{type:'string'},
-		para_5_description:{type:'string', multi:true, rtl:true},
-	}
-});
-cms.add('pages_business',{
-	single:true,
-	fields:{
-		title:{type:'string'},
+		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
 		para_1_title:{type:'string'},
 		para_1_description:{type:'string', multi:true, rtl:true},
@@ -133,10 +115,10 @@ cms.add('pages_business',{
 		photos:{type:'images'}
 	}
 });
-cms.add('pages_businessidea',{
-	single:true,
+
+cms.add('pages_working',{
 	fields:{
-		title:{type:'string'},
+		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
 		para_1_title:{type:'string'},
 		para_1_description:{type:'string', multi:true, rtl:true},
@@ -151,42 +133,8 @@ cms.add('pages_businessidea',{
 		photos:{type:'images'}
 	}
 });
-cms.add('pages_jobs',{
-	single:true,
-	fields:{
-		title:{type:'string'},
-		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
-		para_1_title:{type:'string'},
-		para_1_description:{type:'string', multi:true, rtl:true},
-		para_2_title:{type:'string'},
-		para_2_description:{type:'string', multi:true, rtl:true},
-		para_3_title:{type:'string'},
-		para_3_description:{type:'string', multi:true, rtl:true},
-		para_4_title:{type:'string'},
-		para_4_description:{type:'string', multi:true, rtl:true},
-		para_5_title:{type:'string'},
-		para_5_description:{type:'string', multi:true, rtl:true},
-		photos:{type:'images'}
-	}
-});
-cms.add('pages_contact',{
-	single:true,
-	fields:{
-		title:{type:'string'},
-		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
-		para_1_title:{type:'string'},
-		para_1_description:{type:'string', multi:true, rtl:true},
-		para_2_title:{type:'string'},
-		para_2_description:{type:'string', multi:true, rtl:true},
-		para_3_title:{type:'string'},
-		para_3_description:{type:'string', multi:true, rtl:true},
-		para_4_title:{type:'string'},
-		para_4_description:{type:'string', multi:true, rtl:true},
-		para_5_title:{type:'string'},
-		para_5_description:{type:'string', multi:true, rtl:true},
-		photos:{type:'images'}
-	}
-});
+
+
 
 cms.add('homepage_slides',{
 	single:true,
@@ -283,7 +231,23 @@ function menu(fn){
 				url:'/products/' + cat.category.name.replace(/ /g,'-').toLowerCase() + '/' + cat.name.replace(/ /g,'-').toLowerCase()
 			});
 		});
-		fn(cats);
+		//footer pages
+		var foot = {};
+		cms.pages_customer_relations.find({},{name:1}, function(err, docs){
+			if(err) throw err;
+			foot.customer_relations = docs;
+			console.log(docs);
+			cms.pages_about.find({},{name:1}, function(err, docs){
+				if(err) throw err;
+				foot.about = docs;
+				cms.pages_working.find({},{name:1}, function(err, docs){
+					if(err) throw err;
+					foot.working = docs;
+					var ret = {menus:cats, footer:foot}
+					fn(ret);
+				});
+			});
+		});
 	});  
 };
 
@@ -466,25 +430,40 @@ app.get('/products/:category/:subcategory/:product', function(req,res){
 		});
 	});
 });
-app.get('/:page', function(req,res){
-	var target = {
-		'services':'pages_services',
-		'contact':'pages_contact',
-		'returns':'pages_returns',
-		'business':'pages_business',
-		'business-idea':'pages_businessidea',
-		'jobs':'pages_jobs'
-	};
-	var page = req.params.page;
-	if(typeof cms[target[page]] == 'undefined'){
-		return res.end('haha');
-	}
-	cms[target[page]].findOne(function(err, page){
+app.get('/customer-relations/:page', function(req,res){
+	var page = req.params.page.replace(/-/g, ' ');
+	cms['pages_customer_relations'].findOne({name:new RegExp(page, "gi")},function(err, page){
 		if(err) throw err;
 		if(!page){
 			return res.redirect('/');
 		}
-		res.render('page', page);
+		menu(function(menu){
+			res.render('page', {page:page, menus:menu});
+		});
+	});
+});
+app.get('/about/:page', function(req,res){
+	var page = req.params.page.replace(/-/g, ' ');
+	cms['pages_about'].findOne({name:new RegExp(page, "gi")},function(err, page){
+		if(err) throw err;
+		if(!page){
+			return res.redirect('/');
+		}
+		menu(function(menu){
+			res.render('page', {page:page, menus:menu});
+		});
+	});
+});
+app.get('/working/:page', function(req,res){
+	var page = req.params.page.replace(/-/g, ' ');
+	cms['pages_working'].findOne({name:new RegExp(page, "gi")},function(err, page){
+		if(err) throw err;
+		if(!page){
+			return res.redirect('/');
+		}
+		menu(function(menu){
+			res.render('page', {page:page, menus:menu});
+		});
 	});
 });
 //custom cms
