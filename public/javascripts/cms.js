@@ -368,7 +368,7 @@ var cms = {
 				var field = schema.source.split('.')[1];
 				console.log(data);
 				for(var i=0; i<schema.data.length; i++){
-					var select = schema.data[i]['_id'] == data.id ? " selected " : " ";
+					var select = data && schema.data[i]['_id'] == data.id ? " selected " : " ";
 					dom.append("<option "+select+" value='"+schema.data[i]['_id']+":"+schema.data[i][field]+"'>" + schema.data[i][field] + "</option>");
 				}
 				break;
