@@ -16,7 +16,7 @@ div.container.navbar-wrapper(style='margin-top:105px; z-index:auto')
 div.container.marketing
 	div#category-head.row
 			-if(typeof latest != 'undefined')
-				div#latest.span3
+				//div#latest.span3
 					h3 Latest in this category
 					-each item in latest
 						img(src="/files/mediumbig_" + item.gallery[0])
@@ -25,6 +25,12 @@ div.container.marketing
 						p=item.details
 						p
 							a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
+			section#category-summary.span3
+				h3=details.name
+				img(src='/files/mediumbig' + details.image)
+				h5=details.tag
+				p=details.description
+	
 			div#featured.span8
 				-if(typeof featured == 'object')
 					div#subCarousel.carousel.slide

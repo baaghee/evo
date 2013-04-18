@@ -32,7 +32,7 @@ cms.add('main_subcategory',{
 		category:{type:'select', source:'main_category.name'},
 		tag:{type:'string'},
 		description:{type:'string', multi:true},
-		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:170, height:170}]}
+		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:170, height:170},{prefix:"mediumbig", width:270, height:270,}, {prefix:"mediumlarge", width:370, height:370}]}
 	}
 });
 cms.add('main_product',{
@@ -399,9 +399,10 @@ app.get('/products/:category/:subcategory', function(req,res){
 			.limit(4)
 			.exec(function(err, popular){
 				var nav = {category:category, subcategory:subcategory, link:'/products/' + req.params.category + '/' + req.params.subcategory + '/'};
-
-				menu(function(menu){
-					res.render('subcategory', {nav:nav, latest:latest, featured:featured, popular:popular, subcategory:req.params, menus:menu});
+				cms.main_subcategory.findOne({name:query_subcat}, function(err, details){
+					menu(function(menu){
+						res.render('subcategory', {details:details, nav:nav, latest:latest, featured:featured, popular:popular, subcategory:req.params, menus:menu});
+					});				
 				});
 			});
 		});
