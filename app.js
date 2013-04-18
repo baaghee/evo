@@ -80,7 +80,15 @@ cms.add('main_product',{
 		]}
 	}
 });
-cms.add('pages_customer_relations',{
+cms.add('pages_columns',{
+	single:true,
+	fields:{
+		column1:{type:'string'},
+		column2:{type:'string'},
+		column3:{type:'string'}
+	}
+});
+cms.add('pages_column1',{
 	fields:{
 		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
@@ -98,7 +106,7 @@ cms.add('pages_customer_relations',{
 	}
 });
 
-cms.add('pages_about',{
+cms.add('pages_column2',{
 	fields:{
 		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
@@ -116,7 +124,7 @@ cms.add('pages_about',{
 	}
 });
 
-cms.add('pages_working',{
+cms.add('pages_column3',{
 	fields:{
 		name:{type:'string'},
 		image:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
@@ -133,7 +141,6 @@ cms.add('pages_working',{
 		photos:{type:'images'}
 	}
 });
-
 
 
 cms.add('homepage_slides',{
@@ -233,21 +240,25 @@ function menu(fn){
 		});
 		//footer pages
 		var foot = {};
-		cms.pages_customer_relations.find({},{name:1}, function(err, docs){
+		cms.pages_columns.findOne(function(err, doc){
 			if(err) throw err;
-			foot.customer_relations = docs;
-			console.log(docs);
-			cms.pages_about.find({},{name:1}, function(err, docs){
+			foot.columns = doc;
+			cms.pages_column1.find({},{name:1}, function(err, docs){
 				if(err) throw err;
-				foot.about = docs;
-				cms.pages_working.find({},{name:1}, function(err, docs){
+				foot.column1 = docs;
+				cms.pages_column2.find({},{name:1}, function(err, docs){
 					if(err) throw err;
-					foot.working = docs;
-					var ret = {menus:cats, footer:foot}
-					fn(ret);
+					foot.column2 = docs;
+					cms.pages_column3.find({},{name:1}, function(err, docs){
+						if(err) throw err;
+						foot.column3 = docs;
+						var ret = {menus:cats, footer:foot}
+						fn(ret);
+					});
 				});
 			});
 		});
+
 	});  
 };
 

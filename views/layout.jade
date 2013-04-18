@@ -61,22 +61,26 @@ html(lang='en')
 						li
 							a(href='#') Follow us on Pinterest
 				div.span3
-					h5 Customer Relations
+					-console.log(menus.footer.columns);
+					-var column = menus.footer.columns && menus.footer.columns.column1 ? menus.footer.columns.column1 : "";
+					h5=column
 					ul.unstyled
-						-each page in menus.footer.customer_relations
+						-each page in menus.footer.column1
 							li
 								a(href='/customer-relations/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 
 				div.span3
-					h5 About EVO
+					-var column = menus.footer.columns && menus.footer.columns.column2 ? menus.footer.columns.column2 : "";
+					h5=column
 					ul.unstyled
-						-each page in menus.footer.about
+						-each page in menus.footer.column2
 							li
 								a(href='/about/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 				div.span3
-					h5 Working at EVO
+					-var column = menus.footer.columns && menus.footer.columns.column3 ? menus.footer.columns.column3 : "";
+					h5=column
 					ul.unstyled
-						-each page in menus.footer.working
+						-each page in menus.footer.column3
 							li
 								a(href='/working/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 			div#copyright.row
