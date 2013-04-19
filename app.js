@@ -321,7 +321,7 @@ app.get('/products/:category/:subcategory/all', function(req, res){
 	
 	var query_subcat = new RegExp(subcategory, 'gi');
 	cms.main_product
-	.find({subcategory: query_subcat},{gallery:1, price:1, name:1})
+	.find({'subcategory.name': query_subcat},{gallery:1, price:1, name:1})
 	.sort({_id:-1})
 	.limit(10)
 	.exec(function(err, products){
@@ -336,7 +336,7 @@ app.get('/products/:category/:subcategory/all/since/:id', function(req, res){
 	var id = req.params.id;
 	var query_subcat = new RegExp(subcategory, 'gi');
 	cms.main_product
-	.find({subcategory: query_subcat, _id:{$lt:id}},{gallery:1, price:1, name:1})
+	.find({'subcategory.name': query_subcat, _id:{$lt:id}},{gallery:1, price:1, name:1})
 	.sort({_id:-1})
 	.limit(10)
 	.exec(function(err, products){
