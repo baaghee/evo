@@ -11,7 +11,7 @@ section.container.marketing
 	section#category-head.row
 		section#category-summary.span3
 			h3=category.name
-			img(src='/files/medium' + category.image)
+			img(style='width:270px;', src='/files/medium' + category.image)
 			h5=category.tag
 			p=category.description
 		section#featured.span8
@@ -21,7 +21,7 @@ section.container.marketing
 					-link = '/products/' + subcat.category.name.replace(/ /g, '-').toLowerCase() + '/' + subcat.name.replace(/ /g, '-').toLowerCase()
 						a(href=link)
 							section.span2
-								img.img-circle(src="/files/medium" + subcat.image)
+								img.img-circle(style='width:170px;height:170px',src="/files/medium" + subcat.image)
 								h3
 									a(href=link)=subcat.name
 								p=subcat.tag

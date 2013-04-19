@@ -61,7 +61,7 @@ div.container.marketing
 						-if(featured.prod1)
 							div.item.active
 								div.span4
-									img(src='/files/' + featured.prod1.gallery[0])
+									img(style='width:370px;',src='/files/' + featured.prod1.gallery[0])
 								div.span3
 									-if(featured.prod1.name && featured.prod1.name != "")
 										h3=featured.prod1.name
@@ -79,7 +79,7 @@ div.container.marketing
 						-if(featured.prod2)
 							div.item
 								div.span4
-									img(src='/files/' + featured.prod2.gallery[0])
+									img(style='width:370px;',src='/files/' + featured.prod2.gallery[0])
 								div.span3
 									-if(featured.prod2.name && featured.prod2.name != "")
 										h3=featured.prod2.name
@@ -97,7 +97,7 @@ div.container.marketing
 						-if(featured.prod3)
 							div.item
 								div.span4
-									img(src='/files/' + featured.prod3.gallery[0])
+									img(style='width:370px;',src='/files/' + featured.prod3.gallery[0])
 								div.span3
 									-if(featured.prod3.name && featured.prod3.name != "")
 										h3=featured.prod3.name
@@ -115,7 +115,7 @@ div.container.marketing
 						-if(featured.prod4)
 							div.item
 								div.span4
-									img(src='/files/' + featured.prod4.gallery[0])
+									img(style='width:370px;',src='/files/' + featured.prod4.gallery[0])
 								div.span3
 									-if(featured.prod4.name && featured.prod4.name != "")
 										h3=featured.prod4.name
@@ -138,7 +138,7 @@ div.container.marketing
 			h2 Popular Products
 			-if(popular.prod1)
 				div.span3
-					img.img-circle(src='/files/' + popular.prod1.gallery[0])
+					img.img-circle(style='width:270px;',src='/files/' + popular.prod1.gallery[0])
 					-if(popular.prod1.name && popular.prod1.name != "")
 						h3=popular.prod1.name
 					-if(popular.prod1.price && popular.prod1.price != "")
@@ -149,7 +149,7 @@ div.container.marketing
 						a(href='/products/' + categories[popular.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod2)
 				div.span3
-					img.img-circle(src='/files/' + popular.prod2.gallery[0])
+					img.img-circle(style='width:270px;',src='/files/' + popular.prod2.gallery[0])
 					-if(popular.prod2.name && popular.prod2.name != "")
 						h3=popular.prod2.name
 					-if(popular.prod2.price && popular.prod2.price != "")
@@ -160,7 +160,7 @@ div.container.marketing
 						a(href='/products/' + categories[popular.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod3)
 				div.span3
-					img.img-circle(src='/files/' + popular.prod3.gallery[0])
+					img.img-circle(style='width:270px;',src='/files/' + popular.prod3.gallery[0])
 					-if(popular.prod3.name && popular.prod3.name != "")
 						h3=popular.prod3.name
 					-if(popular.prod3.price && popular.prod3.price != "")
@@ -171,7 +171,7 @@ div.container.marketing
 						a(href='/products/' + categories[popular.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.name.replace(/ /g,'-').toLowerCase()) View details »
 			-if(popular.prod4)
 				div.span3
-					img.img-circle(src='/files/' + popular.prod4.gallery[0])
+					img.img-circle(style='width:270px;',src='/files/' + popular.prod4.gallery[0])
 					-if(popular.prod4.name && popular.prod4.name != "")
 						h3=popular.prod4.name
 					-if(popular.prod4.price && popular.prod4.price != "")
