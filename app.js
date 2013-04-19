@@ -40,6 +40,7 @@ cms.add('main_subcategory',{
 				}
 			]
 		},*/
+		logo:{type:'image',maintain_ratio:false,sizes:[{prefix:"medium", width:270, height:270,}]},
 		slides:{type:'images', crop_height:500, crop_width:1170, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
 		category:{type:'select', source:'main_category.name'},
 		tag:{type:'string'},

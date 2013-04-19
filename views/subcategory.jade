@@ -40,9 +40,7 @@ div.container.marketing
 						p
 							a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
 			section#category-summary.span3
-				h3=details.name
-				img(style='width:270px;height:270px;',src='/files/mediumbig' + details.image)
-				h5=details.tag
+				img(style='width:270px;height:270px;',src='/files/medium' + details.logo)
 	
 			div#featured.span8
 				-if(typeof featured == 'object')
