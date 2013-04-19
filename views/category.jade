@@ -16,7 +16,6 @@ section.container.marketing
 			p=category.description
 		section#featured.span8
 			section#popular-products.row
-				h2 Sub Categories
 				-each subcat in subcategories
 					-link = '/products/' + subcat.category.name.replace(/ /g, '-').toLowerCase() + '/' + subcat.name.replace(/ /g, '-').toLowerCase()
 						a(href=link)

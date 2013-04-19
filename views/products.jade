@@ -8,7 +8,6 @@ div.container.marketing
 				p=featured.details
 		div#featured.span8
 			div#popular-products.row
-				h2 Categories
 				-each category in categories
 					-link = '/products/'+category.name.replace(/ /g,'-').toLowerCase()
 						a(href=link)
