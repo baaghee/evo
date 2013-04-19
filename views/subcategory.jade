@@ -14,7 +14,21 @@ div.container.navbar-wrapper(style='margin-top:105px; z-index:auto')
 			span.divider /
 		li.active=nav.subcategory
 div.container.marketing
-	div#category-head.row
+	div#category-head.row(style='margin-left: -20px')
+			-if(typeof details.slides != 'undefined')
+				div.carousel.slide#slideCarousel(style='overflow:hidden')
+					div#brand
+						h2=details.name
+							//span#brand-mini-info EvoHome is proud to introduce 'EXPRESS MOBEL' furniture to the Maldives.
+						p=details.description
+					div.carousel-inner
+						-first = true;
+						-each item in details.slides
+							div(class="item " + (first == true ? "active" : ""))
+								img(src="/files/" + item)
+							-if(first == true) first = false;
+					a.left.carousel-control(href='#slideCarousel', data-slide='prev') ‹
+					a.right.carousel-control(href='#slideCarousel', data-slide='next') ›
 			-if(typeof latest != 'undefined')
 				//div#latest.span3
 					h3 Latest in this category
@@ -29,7 +43,6 @@ div.container.marketing
 				h3=details.name
 				img(style='width:270px;height:270px;',src='/files/mediumbig' + details.image)
 				h5=details.tag
-				p=details.description
 	
 			div#featured.span8
 				-if(typeof featured == 'object')
@@ -68,7 +81,6 @@ div.container.marketing
 								p
 									a(href=nav.link + item.name.replace(/ /g, '-').toLowerCase()) View details »
 	hr.featurette-divider
-	h2=nav.subcategory
 	div#all-products.row
 		br.clear
 div#all-more.btn.btn-block More

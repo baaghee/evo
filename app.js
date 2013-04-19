@@ -29,6 +29,18 @@ cms.add('main_subcategory',{
 	fields:{
 		name:{type:'string'},
 		//category:{type:'string', source:'main_category.name', autocomplete:true},
+		/*slides:{
+			type:'images', 
+			maintain_ratio:false, 
+			sizes:[
+				{
+					prefix:"big",
+					height:500,
+					width:1170
+				}
+			]
+		},*/
+		slides:{type:'images', crop_height:500, crop_width:1170, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
 		category:{type:'select', source:'main_category.name'},
 		tag:{type:'string'},
 		description:{type:'string', multi:true},

@@ -474,3 +474,42 @@ footer a:link, footer a:visited {
 #product-gallery img:hover {
   border: 1px solid #eee;
 }
+#brand{
+	height:500px;
+	bottom:-461px;
+	position: absolute;
+	z-index: 1000;
+	padding:24px;
+	background-color:rgba(0,0,0,.6);
+	-webkit-transition: bottom 0.7s  cubic-bezier(.21,.81,.51,.37);
+}
+#brand:hover{
+	bottom:-30px;
+}
+#brand:hover #brand-mini-info{
+	display:none;
+}
+#brand h2{
+	font-size:40px;
+	font-weight:bold;
+	color:white;
+}
+#brand-mini-info{
+	font-size: 22px;
+	margin-left: 58px;
+	font-weight: normal;
+}
+#brand p{
+	color: white;
+	font-family: "Titillium Web", sans-serif;
+	font-size: 22px;
+	line-height: 33px;
+}
+
+
+
+
+
+
+
+
