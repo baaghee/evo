@@ -178,7 +178,7 @@ cms.add('homepage_slides',{
 		image4_heading:{type:'string'},
 		image4_details:{type:'string'},
 		image4_url:{type:'string'},
-		image4_url_label:{type:'string'}
+		image4_url_label:{type:'string'},
 		image5:{type:'image', crop_height:700, crop_width:1170, sizes:[{crop:true, prefix:"fixed_", height:500, width:1170}]},
 		image5_heading:{type:'string'},
 		image5_details:{type:'string'},
