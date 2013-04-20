@@ -37,15 +37,16 @@ html(lang='en')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.brand(href='/') EVO
+					a.brand(href='/')
+						img(src="/images/logo.png", style='width:83px', alt='EVO Home')
 					div.nav-collapse.collapse
 						ul.nav
-							li.active
+							li(style='line-height: 27px;')
 								a(href='/products') Products
 							-for(var menu in menus.menus){
-								li.dropdown
+								li.dropdown(style='line-height: 27px;')
 									a.dropdown-toggle(href='#', data-toggle='dropdown')=menus.menus[menu].name
-										b.caret
+										b.caret(style='margin-top: 13px;')
 									ul.dropdown-menu
 										-each sub in menus.menus[menu].subcats
 											li
