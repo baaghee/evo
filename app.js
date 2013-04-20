@@ -357,8 +357,7 @@ app.get('/products', function(req,res){
 		.populate('prod1 prod2 prod3 prod4')
 		.exec(function(err, featured){
 			if(featured){
-				var pr = 'prod'+((Math.random() * 4) << .5);
-				console.log(pr);
+				var pr = 'prod'+((Math.random() * 4 + 1) << .5);
 				var feature_val = featured[pr];
 			}
 			
