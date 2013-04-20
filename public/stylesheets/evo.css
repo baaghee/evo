@@ -78,11 +78,11 @@
     }
 
     .carousel .item {
-      height: 500px;
+      height: 700px;
     }
     .carousel img {
       min-width: 100%;
-      height: 500px;
+      height: 700px;
     }
 
     .carousel-caption {
