@@ -61,10 +61,16 @@ div#evoCarousel.carousel.slide
 div.container.marketing
 	div.row
 		div#newsletter.span4
-			img(src='/images/newsletter.jpg')
+			img(src='/images/newsletter.png')
 			h3 Join The Evo Newsletter
-			p Like Evo? Subscribe to the Evo Newsletter to Discover Evo while earning points.
-			a(href='#') Join Now
+			p Like Evo? Subscribe to the Evo Newsletter to stay up-to-date with our products
+			input(type='text', placeholder='your email...')#signup
+			div.pull-right.sharemenu
+				span.share-on Find us on 
+				a(href='https://www.facebook.com/evohome.mv')
+					i.icon-facebook-sign.icon-3x
+				a(href='https://twitter.com/evo_home')
+					i.icon-twitter.icon-3x
 		-if(featured)
 			div#featured.span8
 				div#subCarousel.carousel.slide
@@ -80,14 +86,6 @@ div.container.marketing
 									-if(featured.prod1.details && featured.prod1.details != "")
 										p=featured.prod1.details
 									a(href='/products/' + categories[featured.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
-									div.pull-right.sharemenu
-										span.share-on Share
-										a(href='#')
-											i.icon-facebook-sign.icon-2x
-										a(href='#')
-											i.icon-twitter.icon-2x
-										a(href='#')
-											i.icon-pinterest.icon-2x
 						-if(featured.prod2)
 							div.item
 								div.span4
@@ -98,14 +96,6 @@ div.container.marketing
 									-if(featured.prod2.details && featured.prod2.details != "")
 										p=featured.prod2.details
 									a(href='/products/' + categories[featured.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod2.name.replace(/ /g,'-').toLowerCase()) View details »
-									div.pull-right.sharemenu
-										span.share-on Share
-										a(href='#')
-											i.icon-facebook-sign.icon-2x
-										a(href='#')
-											i.icon-twitter.icon-2x
-										a(href='#')
-											i.icon-pinterest.icon-2x
 						-if(featured.prod3)
 							div.item
 								div.span4
@@ -116,14 +106,6 @@ div.container.marketing
 									-if(featured.prod3.details && featured.prod3.details != "")
 										p=featured.prod3.details
 									a(href='/products/' + categories[featured.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod3.name.replace(/ /g,'-').toLowerCase()) View details »
-									div.pull-right.sharemenu
-										span.share-on Share
-										a(href='#')
-											i.icon-facebook-sign.icon-2x
-										a(href='#')
-											i.icon-twitter.icon-2x
-										a(href='#')
-											i.icon-pinterest.icon-2x
 						-if(featured.prod4)
 							div.item
 								div.span4
@@ -134,14 +116,6 @@ div.container.marketing
 									-if(featured.prod4.details && featured.prod4.details != "")
 										p=featured.prod4.details
 									a(href='/products/' + categories[featured.prod4.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.name.replace(/ /g,'-').toLowerCase()) View details »
-									div.pull-right.sharemenu
-										span.share-on Share
-										a(href='#')
-											i.icon-facebook-sign.icon-2x
-										a(href='#')
-											i.icon-twitter.icon-2x
-										a(href='#')
-											i.icon-pinterest.icon-2x
 					a.left.carousel-control(href='#subCarousel', data-slide='prev') ‹
 					a.right.carousel-control(href='#subCarousel', data-slide='next') ›
 	hr.featurette-divider
