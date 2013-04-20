@@ -45,6 +45,17 @@ div#evoCarousel.carousel.slide
 								p.lead=slides.image4_details
 							-if (slides.image4_url_label && slides.image4_url_label != "")
 								a.btn.btn-large.btn-primary(href=slides.image4_url||"")=slides.image4_url_label
+			-if (slides.image5)
+				div.item
+					img(src='/files/' + slides.image5, alt='')
+					div.container
+						div.carousel-caption
+							-if (slides.image5_heading)
+								h1=slides.image5_heading
+							-if (slides.image5_details)
+								p.lead=slides.image5_details
+							-if (slides.image5_url_label && slides.image5_url_label != "")
+								a.btn.btn-large.btn-primary(href=slides.image5_url||"")=slides.image5_url_label
 	a.left.carousel-control(href='#evoCarousel', data-slide='prev') ‹
 	a.right.carousel-control(href='#evoCarousel', data-slide='next') ›
 div.container.marketing
