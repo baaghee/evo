@@ -356,9 +356,10 @@ app.get('/products', function(req,res){
 		.findOne()
 		.populate('prod1 prod2 prod3 prod4')
 		.exec(function(err, featured){
-			console.log(featured);
 			if(featured){
-				var feature_val = featured['prod'+((Math.random() * 4) << .5)];
+				var pr = 'prod'+((Math.random() * 4) << .5);
+				console.log(pr);
+				var feature_val = featured[pr];
 			}
 			
 			menu(function(menu){
