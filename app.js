@@ -294,10 +294,10 @@ function getCategory(fn){
 		});
 	});	
 }
-
-app.get('/', function(req, res){
-	return fs.createReadStream(__dirname + '/public/splash/splash.html').pipe(res);
-	//slides
+app.get('/', function(req,res){
+	fs.createReadStream(__dirname + '/public/splash/splash.html').pipe(res);
+});
+app.get('/home', function(req, res){
 	var index = {};
 	cms.homepage_slides.findOne(function(err, slides){
 		index.slides = slides;
