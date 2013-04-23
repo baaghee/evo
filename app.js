@@ -9,6 +9,8 @@ var RedisStore = require('connect-redis')(express);
 var arg = require('optimist').argv;
 var app = module.exports = express.createServer();
 var _ = require('underscore');
+var fs = require('fs');
+var util = require('util');
 delete express.bodyParser.parse['multipart/form-data'];
 
 _.str = require('underscore.string');
@@ -294,6 +296,7 @@ function getCategory(fn){
 }
 
 app.get('/', function(req, res){
+	return fs.createReadStream(__dirname + '/public/splash/splash.html').pipe(res);
 	//slides
 	var index = {};
 	cms.homepage_slides.findOne(function(err, slides){
