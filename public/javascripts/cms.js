@@ -264,7 +264,20 @@ $(function(){
 		cms.makeRequest('homepage_popular_products', 'update', form);
 		$("#popularModal").modal('hide');
 	});
-
+	$("#updatepassword").click(function(){
+		var newpass = $("#newpassword_newpass").val();
+		var conf = $("#newpassword_confirm").val();
+		if(newpass != conf){
+			return alert("password doesn't match");
+		}
+		$.post('/cms/users/update/password',{password:newpass}, function(res){
+			if(res.error){
+				alert(res.error);
+			}else{
+				window.location.reload(true);
+			}
+		});
+	});
 });
 
 var cms = {
