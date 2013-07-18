@@ -12,7 +12,7 @@
     }
 
     .navbar-inverse .btn-navbar:hover, .navbar-inverse .btn-navbar:focus, .navbar-inverse .btn-navbar:active, .navbar-inverse .btn-navbar.active, .navbar-inverse .btn-navbar.disabled, .navbar-inverse .btn-navbar[disabled], .navbar-inverse .btn-navbar, .navbar-inverse .nav-collapse .nav > li > a:hover, .navbar-inverse .nav-collapse .nav > li > a:focus, .navbar-inverse .nav-collapse .dropdown-menu a:hover, .navbar-inverse .nav-collapse .dropdown-menu a:focus {
-    	background: #7500A4;
+    	background: #7f3a87;
     }
 
     /* CUSTOMIZE THE NAVBAR
@@ -28,6 +28,7 @@
 
     /* Remove border and change up box shadow for more contrast */
     .navbar .navbar-inner {
+      background: #904198;
       border: 0;
       -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
          -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
@@ -244,8 +245,12 @@
 	color: rgba(170,170,170,.7);
 }
 
+#featured .carousel-inner {
+  height: 300px;
+}
+
 .navbar .navbar-inner {
-	background: #8900BD;
+	background: #904198;
 }
 
 .navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
@@ -317,6 +322,7 @@ h1, h2, h3, h4, h5 {
 
 #subCarousel {
 	margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 #subCarousel .carousel-control {
@@ -408,7 +414,7 @@ h1, h2, h3, h4, h5 {
 
 
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-	background: #66008F;
+	background: #783e7f;
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
@@ -506,10 +512,53 @@ footer a:link, footer a:visited {
 	line-height: 33px;
 }
 
+#subCarousel .left {
+  margin-left: -35px;
+}
 
+#subCarousel img {
+  margin-top: 20px;
+}
 
+#tips {
+  text-align: left;
+  margin-top: 40px;
+}
 
+#tips p {
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 25px;
+}
 
+h3 {
+  color: #7D5C90;
+  font-size: 20px;
+}
 
+.clear {
+  clear: both;
+}
 
+#popular-products-home {
+  margin-top: 40px;
+}
 
+#popular-products-home .offset1 {
+  margin-left: 70px;
+}
+
+#popular-products-home .offset1 p {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.75px;
+  color: #777;
+}
+
+#popular-products-home p {
+  font-size: 15px;
+}
+
+#popular-products-home .brand {
+  color: #999;
+}
