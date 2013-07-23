@@ -18,6 +18,8 @@ html(lang='en')
 		link(href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200', rel='stylesheet', type='text/css')
 		link(href='/stylesheets/bootstrap.css', rel='stylesheet')
 		link(href='/stylesheets/bootstrap-responsive.css', rel='stylesheet')
+		link(href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', rel='stylesheet')
+		link(href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css', rel='stylesheet')
 		link(href='/stylesheets/evo.css', rel='stylesheet')
 		// if lt IE 9
 			script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
@@ -56,21 +58,21 @@ html(lang='en')
 											a(href= menus.menus[menu].url) All products
 							-}
 		div#contents!=body
-		hr.featurette-divider
 		footer.container
 			div.row
-				div.span3
-					h5 EVO Catalogue
-					ul.unstyled
-						//li
-							a(href='#') Watch us on YouTube
+				div#social-icons-span.span5
+					p Like us, follow us & subscribe to our newsletter to get the latest updates
+					ul#social-icons.unstyled
 						li
-							a(href='https://www.facebook.com/evohome.mv') Add us on Facebook
+							a(href='https://www.facebook.com/evohome.mv') 
+								span.icon-facebook.icon-2x
 						li
-							a(href='https://twitter.com/evo_home') Follow us on Twitter
-						//li
-							a(href='#') Follow us on Pinterest
-				div.span3
+							a(href='https://twitter.com/evo_home')
+								span.icon-twitter.icon-2x
+						li
+							input(type='text', placeholder='enter your email to subscribe...')
+							button(type='submit') join
+				div.span2
 					-console.log(menus.footer.columns);
 					-var column = menus.footer.columns && menus.footer.columns.column1 ? menus.footer.columns.column1 : "";
 					h5=column
@@ -79,14 +81,14 @@ html(lang='en')
 							li
 								a(href='/customer-relations/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
 
-				div.span3
+				div.span2
 					-var column = menus.footer.columns && menus.footer.columns.column2 ? menus.footer.columns.column2 : "";
 					h5=column
 					ul.unstyled
 						-each page in menus.footer.column2
 							li
 								a(href='/about/' + page.name.replace(/ /g, '-').toLowerCase())=page.name
-				div.span3
+				div.span2
 					-var column = menus.footer.columns && menus.footer.columns.column3 ? menus.footer.columns.column3 : "";
 					h5=column
 					ul.unstyled
