@@ -61,17 +61,6 @@ div#evoCarousel.carousel.slide(style="margin: auto; max-width: 1200px;")
 	a.right.carousel-control(href='#evoCarousel', data-slide='next') ›
 div.container.marketing
 	div.row
-		div#newsletter.span4
-			img(src='/images/newsletter.png')
-			h3 Join The Evo Newsletter
-			p Like Evo? Subscribe to the Evo Newsletter to stay up-to-date with our products
-			input(type='text', placeholder='your email...')#signup
-			div.pull-right.sharemenu
-				span.share-on Find us on 
-				a(href='https://www.facebook.com/evohome.mv')
-					i.icon-facebook-sign.icon-3x
-				a(href='https://twitter.com/evo_home')
-					i.icon-twitter.icon-3x
 		-if(featured)
 			div#featured.span8
 				div#subCarousel.carousel.slide
@@ -81,8 +70,9 @@ div.container.marketing
 								div.span4
 									img(style='width:370px;',src='/files/' + featured.prod1.gallery[0])
 								div.span3
+									h3 Featured Product
 									-if(featured.prod1.name && featured.prod1.name != "")
-										h3=featured.prod1.name
+										h4=featured.prod1.name
 									-if(featured.prod1.details && featured.prod1.details != "")
 										p=featured.prod1.details
 									a(href='/products/' + categories[featured.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
@@ -118,7 +108,39 @@ div.container.marketing
 									a(href='/products/' + categories[featured.prod4.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + featured.prod4.name.replace(/ /g,'-').toLowerCase()) View details »
 					a.left.carousel-control(href='#subCarousel', data-slide='prev') ‹
 					a.right.carousel-control(href='#subCarousel', data-slide='next') ›
+		div#tips.span4
+			h3 Home Decor Tips
+			p.span3 Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today.
+			div.row
+				ul.clear.unstyled
+					li.span1
+						img(src="http://st.houzz.com/fimgs/99e1cb5a007f350e_8687-w128-h128-b0-p0--contemporary-kitchen.jpg")
+					li.span1
+						img(src="http://st.houzz.com/fimgs/dc21f0d3003a6720_4583-w128-h128-b0-p0--modern-kitchen.jpg")
+					li.span1
+						img(src="http://www.ldams.org/wp-content/uploads/et_temp/Kitchen-Remodeling-3-71373_128x128.jpg")
 	hr.featurette-divider
+
+	div#popular-products-home.row
+		div.span2.offset1
+			h3 Popular Products
+			p  Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today.
+		div.span3
+			img(src="http://www.josephjoseph.com/data/media/products/large/Elevate%20100%20Carousel.jpeg")
+			h4 Utensil Set
+			p.brand Fergo
+			p.price MVR 2560.00
+		div.span3
+			img(src="http://ecx.images-amazon.com/images/I/51QBOpr3DsL._SY300_.jpg")
+			h4 Stainless Steel Pane
+			p.brand Fergo
+			p.price MVR 2560.00
+		div.span3
+			img(src="http://jangrue.com/wp-content/uploads/2013/05/Luxury-White-Juicer-And-Home-Appliances-By-DeLonghi%E2%80%98s-Faceted-Home.jpg")
+			h4 Vaccuum Cleaner
+			p.brand Fergo
+			p.price MVR 2560.00
+
 	-if(popular)
 		div#popular-products.row
 			h2 Popular Products
