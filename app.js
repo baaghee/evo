@@ -188,7 +188,12 @@ cms.add('homepage_slides',{
 		image5_url_label:{type:'string'}
 	}
 });
-
+cms.add('homepage_decorative', {
+	single:true,
+	fields:{
+		text:{type:'string', multi:true}
+	}
+});
 cms.add('homepage_featured_products',{
 	//GENERATE GUI = false
 	single:true,

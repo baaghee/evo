@@ -14,6 +14,14 @@ section.row
 									- var m = men.name.split("_")[1];
 									- var searchable = men.searchable ? "true" : "false";								
 									li.capitalize(cms-name=men.name, data-searchable=searchable)=m
+		div(id='accordian_homestuff')
+			div.accordion-group
+				div.accordion-heading
+					a.accordion-toggle.capitalize(href="#collapse_homestuff",data-parent="#accordion_homestuff",data-toggle="collapse") Homepage
+				div.accordion-body.in.collapse(style="height: auto; ", id='collapse_homestuff')
+					div.accordion-inner.no-padding
+						ul.cms-load
+								li.capitalize(static-load='homepage', data-sources='homepage_slides homepage_featured_products homepage_popular_products') Homepage
 	section.span10	
 		section.span10#component-search-container
 			section.well

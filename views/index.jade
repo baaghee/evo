@@ -121,70 +121,39 @@ div.container.marketing
 						img(src="http://www.ldams.org/wp-content/uploads/et_temp/Kitchen-Remodeling-3-71373_128x128.jpg")
 	hr.featurette-divider
 
-	div#popular-products-home.row
-		div.span2.offset1
-			h3 Popular Products
-			p  Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today.
-		div.span3
-			img(src="http://www.josephjoseph.com/data/media/products/large/Elevate%20100%20Carousel.jpeg")
-			h4 Utensil Set
-			p.brand Fergo
-			p.price MVR 2560.00
-		div.span3
-			img(src="http://ecx.images-amazon.com/images/I/51QBOpr3DsL._SY300_.jpg")
-			h4 Stainless Steel Pane
-			p.brand Fergo
-			p.price MVR 2560.00
-		div.span3
-			img(src="http://jangrue.com/wp-content/uploads/2013/05/Luxury-White-Juicer-And-Home-Appliances-By-DeLonghi%E2%80%98s-Faceted-Home.jpg")
-			h4 Vaccuum Cleaner
-			p.brand Fergo
-			p.price MVR 2560.00
-
 	-if(popular)
-		div#popular-products.row
-			h2 Popular Products
+		div#popular-products-home.row
+			div.span2.offset1
+				h3 Popular Products
+				p  Explore More with Complimentary Resort & Gaming Credits. Book Today. Explore More with Complimentary Resort & Gaming Credits. Book Today.
 			-if(popular.prod1)
 				div.span3
-					img.img-circle(style='width:270px;',src='/files/' + popular.prod1.gallery[0])
+					a(href='/products/' + categories[popular.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.name.replace(/ /g,'-').toLowerCase())
+						img.img(style='width:270px;',src='/files/' + popular.prod1.gallery[0])
 					-if(popular.prod1.name && popular.prod1.name != "")
-						h3=popular.prod1.name
+						h4=popular.prod1.name
+					-if(popular.prod1.subcategory && popular.prod1.subcategory != "")
+						p.brand=popular.prod1.subcategory.name
 					-if(popular.prod1.price && popular.prod1.price != "")
-						h5=popular.prod1.price
-					-if(popular.prod1.details && popular.prod1.details != "")
-						p=popular.prod1.details
-					p
-						a(href='/products/' + categories[popular.prod1.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod1.name.replace(/ /g,'-').toLowerCase()) View details »
+						p.price=popular.prod1.price
 			-if(popular.prod2)
 				div.span3
-					img.img-circle(style='width:270px;',src='/files/' + popular.prod2.gallery[0])
+					a(href='/products/' + categories[popular.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.name.replace(/ /g,'-').toLowerCase())
+						img.img(style='width:270px;',src='/files/' + popular.prod2.gallery[0])
 					-if(popular.prod2.name && popular.prod2.name != "")
-						h3=popular.prod2.name
+						h4=popular.prod2.name
+					-if(popular.prod2.subcategory && popular.prod2.subcategory != "")
+						p.brand=popular.prod2.subcategory.name
 					-if(popular.prod2.price && popular.prod2.price != "")
-						h5=popular.prod2.price
-					-if(popular.prod2.details && popular.prod2.details != "")
-						p=popular.prod2.details
-					p
-						a(href='/products/' + categories[popular.prod2.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod2.name.replace(/ /g,'-').toLowerCase()) View details »
+						p.price=popular.prod2.price
 			-if(popular.prod3)
 				div.span3
-					img.img-circle(style='width:270px;',src='/files/' + popular.prod3.gallery[0])
+					a(href='/products/' + categories[popular.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.name.replace(/ /g,'-').toLowerCase())
+						img.img(style='width:270px;',src='/files/' + popular.prod3.gallery[0])
 					-if(popular.prod3.name && popular.prod3.name != "")
-						h3=popular.prod3.name
+						h4=popular.prod3.name
+					-if(popular.prod3.subcategory && popular.prod3.subcategory != "")
+						p.brand=popular.prod3.subcategory.name
 					-if(popular.prod3.price && popular.prod3.price != "")
-						h5=popular.prod3.price
-					-if(popular.prod3.details && popular.prod3.details != "")
-						p=popular.prod3.details
-					p
-						a(href='/products/' + categories[popular.prod3.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod3.name.replace(/ /g,'-').toLowerCase()) View details »
-			-if(popular.prod4)
-				div.span3
-					img.img-circle(style='width:270px;',src='/files/' + popular.prod4.gallery[0])
-					-if(popular.prod4.name && popular.prod4.name != "")
-						h3=popular.prod4.name
-					-if(popular.prod4.price && popular.prod4.price != "")
-						h5=popular.prod4.price
-					-if(popular.prod4.details && popular.prod4.details != "")
-						p=popular.prod4.details
-					p
-						a(href='/products/' + categories[popular.prod4.subcategory.id].name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod4.subcategory.name.replace(/ /g,'-').toLowerCase() + "/" + popular.prod4.name.replace(/ /g,'-').toLowerCase()) View details »
+						p.price=popular.prod3.price
+
